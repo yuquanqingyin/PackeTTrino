@@ -93,13 +93,13 @@ function getARecord(dataId, name) {
  * @throws {Error} If any field is invalid or a SOA record already exists for the domain.
  */
 function isValidSOARecord(dataId, domain, authorityNameServer, serial, cacheTTL) {
-    if (!isValidDomain(domain)) throw new Error(`Error: domain ${domain} is invalid`);
-    if (!domain.endsWith(".")) throw new Error(`Error: domain ${domain} must be an FQDN`);
-    if (!isValidDomain(authorityNameServer)) throw new Error(`Error: authority server ${authorityNameServer} is invalid`);
-    if (!authorityNameServer.endsWith(".")) throw new Error(`Error: authority server ${authorityNameServer} must be an FQDN`);
-    if (isNaN(cacheTTL)) throw new Error(`Error: TTL ${cacheTTL} is not valid.`);
-    if (cacheTTL < 0 || cacheTTL > 86400) throw new Error(`Error: TTL ${cacheTTL} must be a number between 0 and 86400.`);
-    if (hasSoaRecord(dataId, domain)) throw new Error(`Error: A SOA record already exists for ${domain}.`);
+    if (!isValidDomain(domain)) throw new Error(`错误：域名 ${domain} 无效。`);
+    if (!domain.endsWith(".")) throw new Error(`错误：域名 ${domain} 必须是以点号结尾的完全限定域名（FQDN）。`);
+    if (!isValidDomain(authorityNameServer)) throw new Error(`错误：权威 DNS 服务器 ${authorityNameServer} 无效。`);
+    if (!authorityNameServer.endsWith(".")) throw new Error(`错误：权威 DNS 服务器 ${authorityNameServer} 必须是完全限定域名（FQDN）。`);
+    if (isNaN(cacheTTL)) throw new Error(`错误：TTL“${cacheTTL}”无效。`);
+    if (cacheTTL < 0 || cacheTTL > 86400) throw new Error(`错误：TTL 必须是 0 到 86400 之间的数字。`);
+    if (hasSoaRecord(dataId, domain)) throw new Error(`错误：域名 ${domain} 已存在 SOA 记录。`);
 }
 
 /**
@@ -112,11 +112,11 @@ function isValidSOARecord(dataId, domain, authorityNameServer, serial, cacheTTL)
  * @throws {Error} If the domain has no SOA record, or either field is not a valid FQDN.
  */
 function isValidNSRecord(dataId, domain, authorityNameServer) {
-    if (!hasSoaRecord(dataId, domain)) throw new Error(`Error: Domain ${domain} must have a SOA record first.`);
-    if (!isValidDomain(domain)) throw new Error("Error: Invalid Domain");
-    if (!domain.endsWith(".")) throw new Error("Error: Domain Must Be An FQDN");
-    if (!isValidDomain(authorityNameServer)) throw new Error("Error: Invalid Authority");
-    if (!authorityNameServer.endsWith(".")) throw new Error("Error: Authority Must Be An FQDN");
+    if (!hasSoaRecord(dataId, domain)) throw new Error(`错误：请先为域名 ${domain} 添加 SOA 记录。`);
+    if (!isValidDomain(domain)) throw new Error("错误：域名无效。");
+    if (!domain.endsWith(".")) throw new Error("错误：域名必须是完全限定域名（FQDN）。");
+    if (!isValidDomain(authorityNameServer)) throw new Error("错误：权威 DNS 服务器无效。");
+    if (!authorityNameServer.endsWith(".")) throw new Error("错误：权威 DNS 服务器必须是完全限定域名（FQDN）。");
 }
 
 /**
@@ -129,12 +129,12 @@ function isValidNSRecord(dataId, domain, authorityNameServer) {
  * @throws {Error} If the name or IP is invalid, or if the domain lacks SOA/NS records.
  */
 function isValidARecord(serverObjectId, name, value) {
-    if (!isValidDomain(name)) throw new Error(`Error: Name ${name} Is Invalid`);
+    if (!isValidDomain(name)) throw new Error(`错误：名称 ${name} 无效。`);
     const domain = name.split(".").slice(1).join("."); //<-- extraemos el dominio del nombre
-    if (!hasSoaRecord(serverObjectId, domain)) throw new Error(`Error: Domain ${domain} must have a SOA record first.`);
-    if (!hasNsRecord(serverObjectId, domain)) throw new Error(`Error: Domain ${domain} must have a NS record first.`);
-    if (!name.endsWith(".")) throw new Error(`Error: Name ${name} must be an FQDN`);
-    if (!isValidIp(value)) throw new Error(`Error: IP ${value} Is Invalid`);
+    if (!hasSoaRecord(serverObjectId, domain)) throw new Error(`错误：请先为域名 ${domain} 添加 SOA 记录。`);
+    if (!hasNsRecord(serverObjectId, domain)) throw new Error(`错误：请先为域名 ${domain} 添加 NS 记录。`);
+    if (!name.endsWith(".")) throw new Error(`错误：名称 ${name} 必须是完全限定域名（FQDN）。`);
+    if (!isValidIp(value)) throw new Error(`错误：IP 地址 ${value} 无效。`);
 }
 
 /**
@@ -147,11 +147,11 @@ function isValidARecord(serverObjectId, name, value) {
  * @throws {Error} If either domain is invalid, not an FQDN, or `name` has no A record.
  */
 function isValidCNAMERecord(serverObjectId, alias, name) {
-    if (!isValidDomain(alias)) throw new Error(`Error: Domain ${alias} is invalid`);
-    if (!alias.endsWith(".")) throw new Error(`Error: domain ${alias} must be an FQDN`);
-    if (!isValidDomain(name)) throw new Error(`Error: Domain ${name} is invalid`);
-    if (!name.endsWith(".")) throw new Error(`Error: domain ${name} must be an FQDN`);
-    if (!getARecord(serverObjectId, name)) throw new Error(`Error: Domain ${name} must have an A record first.`);
+    if (!isValidDomain(alias)) throw new Error(`错误：域名 ${alias} 无效。`);
+    if (!alias.endsWith(".")) throw new Error(`错误：域名 ${alias} 必须是完全限定域名（FQDN）。`);
+    if (!isValidDomain(name)) throw new Error(`错误：域名 ${name} 无效。`);
+    if (!name.endsWith(".")) throw new Error(`错误：域名 ${name} 必须是完全限定域名（FQDN）。`);
+    if (!getARecord(serverObjectId, name)) throw new Error(`错误：请先为域名 ${name} 添加 A 记录。`);
 }
 
 /**
@@ -625,9 +625,9 @@ function flushDnsCache(networkObjectId) {
     const $cacheDnsTable = $networkObject.querySelector(".cache-dns-table").querySelector("table");
     $cacheDnsTable.innerHTML = `
         <tr>
-            <th>Domain</th>
-            <th>Record Type</th>
-            <th>Value</th>
+            <th>域名</th>
+            <th>记录类型</th>
+            <th>记录值</th>
         </tr>
     `;
 }

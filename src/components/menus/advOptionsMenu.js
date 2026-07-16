@@ -54,7 +54,7 @@ function advancedOptionsObject(...options) {
 function terminalOptionButton() {
     const $button = document.createElement("button");
     $button.id = "terminal-option";
-    $button.innerHTML = "Terminal Mode";
+    $button.innerHTML = "终端模式";
     $button.setAttribute("onclick", "showTerminal(event)");
     return $button;
 }
@@ -68,7 +68,7 @@ function terminalOptionButton() {
 function arpOptionButton() {
     const $button = document.createElement("button");
     $button.id = "arp-option";
-    $button.innerHTML = "View ARP Table";
+    $button.innerHTML = "查看 ARP 表";
     $button.setAttribute("onclick", "showObjectModalTable(event, '.arp-table')");
     return $button;
 }
@@ -82,7 +82,7 @@ function arpOptionButton() {
 function cacheDnsOptionButton() {
     const $button = document.createElement("button");
     $button.id = "cache-dns-option";
-    $button.innerHTML = "View DNS Cache";
+    $button.innerHTML = "查看 DNS 缓存";
     $button.setAttribute("onclick", "showObjectModalTable(event, '.cache-dns-table')");
     return $button;
 }
@@ -96,7 +96,7 @@ function cacheDnsOptionButton() {
 function browserOptionButton() {
     const $button = document.createElement("button");
     $button.id = "browser-option";
-    $button.innerHTML = "Browser";
+    $button.innerHTML = "浏览器";
     $button.setAttribute("onclick", "openBrowser(event)");
     return $button;
 }
@@ -110,7 +110,7 @@ function browserOptionButton() {
 function deleteOptionButton() {
     const $button = document.createElement("button");
     $button.id = "delete-option";
-    $button.innerHTML = "Delete";
+    $button.innerHTML = "删除设备";
     $button.setAttribute("onclick", "deleteItem(event)");
     return $button;
 }
@@ -124,7 +124,7 @@ function deleteOptionButton() {
 function firewallTableOptionButton() {
     const $button = document.createElement("button");
     $button.id = "firewall-option";
-    $button.innerHTML = "View Firewall Table";
+    $button.innerHTML = "查看防火墙规则";
     $button.setAttribute("onclick", "showObjectModalTable(event, '.firewall-table')");
     return $button;
 }
@@ -138,7 +138,7 @@ function firewallTableOptionButton() {
 function routingTableOptionButton() {
     const $button = document.createElement("button");
     $button.id = "routing-option";
-    $button.innerHTML = "View Routing Table";
+    $button.innerHTML = "查看路由表";
     $button.setAttribute("onclick", "showObjectModalTable(event, '.routing-table')");
     return $button;
 }
@@ -152,7 +152,7 @@ function routingTableOptionButton() {
 function leasesTableOptionButton() {
     const $button = document.createElement("button");
     $button.id = "dhcp-option";
-    $button.innerHTML = "View Leases Table";
+    $button.innerHTML = "查看租约表";
     $button.setAttribute("onclick", "showObjectModalTable(event, '.dhcp-table')");
     return $button;
 }
@@ -166,7 +166,7 @@ function leasesTableOptionButton() {
 function dnsRecordsOptionButton() {
     const $button = document.createElement("button");
     $button.id = "dns-option";
-    $button.innerHTML = "View DNS Records Table";
+    $button.innerHTML = "查看 DNS 记录表";
     $button.setAttribute("onclick", "showObjectModalTable(event, '.dns-table')");
     return $button;
 }
@@ -180,7 +180,7 @@ function dnsRecordsOptionButton() {
 function dhcpServerConfig() {
     const $button = document.createElement("button");
     $button.id = "dhcp-server-config";
-    $button.innerHTML = "Configure DHCP Server";
+    $button.innerHTML = "配置 DHCP 服务器";
     $button.setAttribute("onclick", "showDhcpMenu(event)");
     return $button;
 }
@@ -194,7 +194,7 @@ function dhcpServerConfig() {
 function dhcpRelayConfig() {
     const $button = document.createElement("button");
     $button.id = "dhcp-relay-config";
-    $button.innerHTML = "Configure DHCP Relay";
+    $button.innerHTML = "配置 DHCP 中继";
     $button.setAttribute("onclick", "showDhcpRelayMenu(event)");
     return $button;
 }
@@ -208,7 +208,7 @@ function dhcpRelayConfig() {
 function dnsServerConfig() {
     const $button = document.createElement("button");
     $button.id = "dns-server-config";
-    $button.innerHTML = "Configure DNS Server";
+    $button.innerHTML = "配置 DNS 服务器";
     $button.setAttribute("onclick", "showDnsServerMenu(event)");
     return $button;
 }

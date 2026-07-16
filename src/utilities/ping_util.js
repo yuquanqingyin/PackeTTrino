@@ -64,7 +64,7 @@ async function quickPing(id) {
     const networkObjectIp = getAvailableIps($networkObject.id)[0];
 
     if (!networkObjectIp) {
-        bodyComponent.render(popupMessage("<span>Error: </span> No IP found for object " + id));
+        bodyComponent.render(popupMessage("<span>错误：</span>设备 " + id + " 尚未配置 IP 地址。"));
         return;
     }
 

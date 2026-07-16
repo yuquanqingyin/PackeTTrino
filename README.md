@@ -1,66 +1,90 @@
 # PackeTTrino
 
-## Web-Based Network Simulator in Pure JavaScript
+## 基于网页的纯 JavaScript 网络模拟器
 
-Developed by Amín Pérez | May 2025
+由 Amín Pérez 开发，始于 2025 年。
 
----
+PackeTTrino 是一款完全使用原生 JavaScript、HTML 和 CSS 构建的交互式网络模拟器，无需外部前端框架。你可以用它设计、模拟并实时分析计算机网络，学习网络协议、路由以及设备通信。
 
-## Description
+## 主要功能
 
-**PackeTTrino** is a fully interactive network simulator built entirely with native web technologies (JavaScript, HTML, and CSS). No external libraries or frameworks required. It allows you to design, simulate, and analyze computer networks in real time. It provides a hands-on experience for learning networking protocols, routing, and device communication.
+- 自定义网络拓扑，可添加 PC、交换机、路由器及多种服务器
+- 支持 DHCP、DNS、TCP/IP、ICMP、ARP 等协议
+- 自动路由和实时数据包传输动画
+- 内置 Linux 风格终端、网页浏览器和数据包分析器
+- 可配置的防火墙规则及实时反馈
+- ARP、MAC、路由、DNS 缓存和 DHCP 租约状态表
+- 浅色与深色主题
 
-## Key Features
+## 可用网络组件
 
-- **Complete Network Simulation**: Design custom topologies with various network devices  
-- **Implemented Protocols**: DHCP, DNS, TCP/IP, ICMP, ARP, and more  
-- **Dynamic Routing**: Real-time simulation of routing protocols  
-- **Packet Visualization**: Track packet flow through the network visually  
-- **Integrated Tools**: Linux-style terminal, web browser, and packet analyzer  
-- **Configurable Firewall**: Create and apply firewall rules with live feedback  
-- **Intuitive Interface**: Control panel for managing devices and services  
+- PC 和工作站
+- 交换机
+- 路由器
+- DHCP 服务器
+- DHCP 中继代理
+- DNS 服务器
+- Apache2 Web 服务器
 
-## Available Network Components
+## 环境要求
 
-- PCs and workstations  
-- Switches  
-- Routers  
-- DHCP servers  
-- DHCP relay agents  
-- DNS servers  
-- Web servers (Apache2)  
+- Node.js 20.19+ 或 22.12+
+- pnpm 10+
+- 支持 ES6+ 的现代浏览器
 
-## System Requirements
+## 启动项目
 
-- Modern web browser with JavaScript ES6+ support  
-- No installation or internet connection required  
+```bash
+pnpm install
+pnpm dev
+```
 
-## How to Use
+打开终端显示的本地地址（通常为 `http://localhost:5173`）。
 
-1. Open the `index.html` file in your browser  
-2. Use the side panel to drag and drop devices into the workspace  
-3. Connect devices with cables  
-4. Configure device properties (IP addresses, subnet masks, etc.)  
-5. Use animation controls to visualize packet traffic  
-6. Inspect routing, ARP, DNS, and DHCP tables to monitor the network state  
+### Windows 提示：找不到 pnpm
 
-![image](https://github.com/user-attachments/assets/0876157d-8527-45b8-bf6f-0bfe4fe8b291)
+项目也可以直接使用 Node.js 自带的 npm。在 PowerShell 中如果 `npm` 被脚本执行策略拦截，请显式调用 `.cmd` 文件：
 
-## Advanced Features
+```powershell
+npm.cmd install
+npm.cmd run dev
+```
 
-- **Packet Type Visualization**: Color-coded display for different packet types (broadcast, unicast, TCP, DNS, etc.)  
-- **State Tables**: Live view of ARP, MAC, routing, DNS cache, and DHCP leases  
-- **Debugging Tools**: Built-in terminal with common Linux network commands (`ping`, `traceroute`, `ip`, `arp`, etc.)  
-- **Dark Mode**: Light and dark theme support  
+如果依赖已经安装，只需执行：
 
-![image](https://github.com/user-attachments/assets/c7e60ec2-6cd7-427c-97ef-9e28f68209d2)
+```powershell
+npm.cmd run dev
+```
 
-## About the Project
+也可以通过 Corepack 使用项目指定的 pnpm 版本，无需全局安装：
 
-This project was developed as a final year thesis for the **Advanced Vocational Training in Network Systems Administration**. All features are self-implemented using native web technologies, without external libraries or dependencies.
+```powershell
+corepack pnpm install
+corepack pnpm dev
+```
 
----
+生产构建及本地预览：
 
-## Keywords (for SEO)
+```bash
+pnpm build
+pnpm preview
+```
 
-`network simulator`, `javascript networking`, `educational tool`, `packet tracer alternative`, `web-based network lab`, `DHCP DNS TCP IP simulator`, `HTML CSS JS`, `pure JavaScript network project`, `open source network simulator`, `firewall configuration`, `interactive network tool`
+## 使用方法
+
+1. 从底部工具栏把设备拖到工作区。
+2. 将设备拖到交换机上建立连接。
+3. 单击设备配置 IP 地址、子网掩码、网关等属性。
+4. 使用动画控件查看数据包传输过程。
+5. 查看路由表、ARP 表、DNS 表和 DHCP 租约表，了解网络状态。
+6. 右键单击设备可打开终端和更多工具。
+
+![PackeTTrino 界面](https://github.com/user-attachments/assets/0876157d-8527-45b8-bf6f-0bfe4fe8b291)
+
+## 项目背景
+
+本项目最初作为网络计算机系统管理专业的毕业设计开发，所有主要功能均以原生 Web 技术自行实现。
+
+## 关键词
+
+`网络模拟器`、`JavaScript 网络实验`、`计算机网络教学`、`Packet Tracer 替代方案`、`DHCP`、`DNS`、`TCP/IP`、`防火墙配置`

@@ -1,0 +1,11 @@
+services:
+  packttrino:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: packttrino-zh:local
+    container_name: packttrino
+    restart: unless-stopped
+    ports:
+      - "${PACKTTRINO_PORT:-8080}:80"
+

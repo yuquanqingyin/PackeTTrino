@@ -21,18 +21,18 @@ function DynamicRoutingMenu() {
 
         <div class="dynamic-routing-modal">
 
-            <h1> Automatic Routing Tool </h1>
+            <h1> 自动路由工具 </h1>
 
             <div class="default-network-routing-container">
-                <p>Default route to a network (Optional):</p>
-                <input class="default-network-routing" type="text" placeholder="For example, 8.0.0.0/8">
+                <p>默认路由的目标网络（可选）：</p>
+                <input class="default-network-routing" type="text" placeholder="例如：8.0.0.0/8">
             </div>
 
-            <p>⚠︎ Are you sure you want to enable the Automatic Routing feature?</p>
+            <p>⚠ 确定要启用自动路由功能吗？</p>
 
-            <button class="btn-accept btn-modern-blue dark no-animation">Yes, I want to route automatically</button>
+            <button class="btn-accept btn-modern-blue dark no-animation">确定，自动配置路由</button>
 
-            <button class="btn-reject btn-modern-red no-animation" id="close-btn">No, go back to panel</button>
+            <button class="btn-reject btn-modern-red no-animation" id="close-btn">取消并返回</button>
 
         </div>
     `;
@@ -85,14 +85,14 @@ async function dynamicRoutingHandler() {
     if ( $inputComponentValue !== "") {
 
         if (!isValidCidrIp($inputComponentValue)) {
-            bodyComponent.render(popupMessage(`<span>Error: </span> Invalid network format.`));
+            bodyComponent.render(popupMessage(`<span>错误：</span>网络格式无效。`));
             return;
         }
 
         const [networkIp, networkNetmask] = parseCidr($inputComponentValue);
 
         if (getNetwork(networkIp, networkNetmask) !== networkIp) {
-            bodyComponent.render(popupMessage(`<span> Error: </span> Does not match a valid network.`));
+            bodyComponent.render(popupMessage(`<span>错误：</span>输入的地址不是有效的网络地址。`));
             return;
         }
 
@@ -108,7 +108,7 @@ async function dynamicRoutingHandler() {
         dynamicRouting();
     }catch(error) {
         console.log(error);
-        bodyComponent.render(popupMessage(`<span>Error: </span>An error occurred while enabling the Automatic Routing feature.`));
+        bodyComponent.render(popupMessage(`<span>错误：</span>启用自动路由时发生错误。`));
     }
 
     return new Promise(resolve => {

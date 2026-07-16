@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
+    "build": "vite build && node scripts/copy-static.mjs",
+    "preview": "vite preview",
     "lint": "eslint src"
   },
   "keywords": [],

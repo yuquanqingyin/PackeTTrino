@@ -1040,6 +1040,6 @@ function setDefaultGateway(networkObjectId, newGateway) {
         }
     }
 
-    throw new Error("networkd: Error: Gateway unreachable.");
+    throw new Error("networkd：错误：无法到达该网关。");
 
 }

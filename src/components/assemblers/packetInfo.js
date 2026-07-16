@@ -98,39 +98,39 @@ function packetInfo(event) {
         <div class="packet-fields-modal">
             <table>
                 <tr>
-                    <th>Application</th>
+                    <th>应用层</th>
                     ${$packetPrint[6].map(field => `<td>${escapeHtml(field)}</td>`).join("")}
                 </tr>
                 <tr>
-                    <th>Presentation</th>
+                    <th>表示层</th>
                     ${$packetPrint[5].map(field => `<td>${field}</td>`).join("")}
                 </tr>
                 <tr>
-                    <th>Session</th>
+                    <th>会话层</th>
                     ${$packetPrint[4].map(field => `<td>${field}</td>`).join("")}
                 </tr>
                 <tr>
-                    <th>Transport</th>
+                    <th>传输层</th>
                     ${$packetPrint[3].map(field => `<td>${field}</td>`).join("")}
                 </tr>
                 <tr>
-                    <th>Network</th>
+                    <th>网络层</th>
                     <td>IPv4</td>
                     ${$packetPrint[2].map(field => `<td>${field}</td>`).join("")}
                 </tr>
                 <tr>
-                    <th>Data Link</th>
+                    <th>数据链路层</th>
                     <td>Ethernet (IEEE 802.3)</td>
                     ${$packetPrint[1].map(field => `<td>${field}</td>`).join("")}
                 </tr>
                 <tr>
-                    <th>Physical</th>
+                    <th>物理层</th>
                     <td>Ethernet</td>
                     ${$packetPrint[0].map(field => `<td>${field}</td>`).join("")}
                 </tr>
             </table>
             
-            <button class="btn-close" onclick="closePacketFieldsModal()">Close</button>
+            <button class="btn-close" onclick="closePacketFieldsModal()">关闭</button>
 
         </div>
     `;

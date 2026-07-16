@@ -30,8 +30,8 @@ function dhcp_server_menu() {
         <div class="window-frame"> <p class="frame-title"></p> </div>
 
         <div class="nav-panel">
-            <button class="btn-modern-blue dark active" id="btn-basic-tab">Basic</button>
-            <button class="btn-modern-blue dark" id="btn-reservations">Reservations</button>
+            <button class="btn-modern-blue dark active" id="btn-basic-tab">基本设置</button>
+            <button class="btn-modern-blue dark" id="btn-reservations">地址保留</button>
         </div>
 
         <section class="main-section">
@@ -39,22 +39,22 @@ function dhcp_server_menu() {
             <section class="basic-section">
 
                 <div>
-                    <label for="iface">Interface:</label>
+                    <label for="iface">网络接口：</label>
                     <select id="iface" name="iface"></select>
                 </div>
 
                 <div>
-                    <label for="ip">IP Address (IPv4):</label>
+                    <label for="ip">IP 地址（IPv4）：</label>
                     <input type="text" id="ip" name="ip">
                 </div>
 
                 <div >
-                    <label for="netmask">Netmask:</label>
+                    <label for="netmask">子网掩码：</label>
                     <input type="text" id="netmask" name="netmask">
                 </div>
 
                 <div >
-                    <label for="gateway">Gateway:</label>
+                    <label for="gateway">默认网关：</label>
                     <input type="text" id="gateway" name="gateway">
                 </div>
 
@@ -62,44 +62,44 @@ function dhcp_server_menu() {
 
             <section class="dhcp-options-section">
 
-                <p> DHCP Service Options </p>
+                <p> DHCP 服务选项 </p>
 
                 <div>
-                    <label for="dhcp-listen-on-interfaces">Listening Interfaces:</label>
+                    <label for="dhcp-listen-on-interfaces">监听接口：</label>
                     <input type="text" id="dhcp-listen-on-interfaces" name="dhcp-listen-on-interfaces" placeholder="enp0s3,enp0s8">
                 </div>
 
                 <div>
-                    <label for="range-start">IP Range:</label>
+                    <label for="range-start">IP 地址池：</label>
                     <input type="text" id="range-start" name="range-start">
                     <input type="text" id="range-end" name="range-end">
                 </div>
 
                 <div>
-                    <label for="dhcp-offer-netmask">Netmask:</label>
+                    <label for="dhcp-offer-netmask">分配的子网掩码：</label>
                     <input type="text" id="dhcp-offer-netmask" name="dhcp-offer-netmask">
                 </div>
 
                 <div>
-                    <label for="dhcp-offer-gateway">Gateway:</label>
+                    <label for="dhcp-offer-gateway">分配的网关：</label>
                     <input type="text" id="dhcp-offer-gateway" name="dhcp-offer-gateway">
                 </div>
 
                 <div>
-                    <label for="dhcp-offer-dns">DNS Server:</label>
+                    <label for="dhcp-offer-dns">DNS 服务器：</label>
                     <input type="text" id="dhcp-offer-dns" name="dhcp-offer-dns">
                 </div>
 
                 <div>
-                    <label for="dhcp-offer-lease-time">Lease Time:</label>
+                    <label for="dhcp-offer-lease-time">租约时间（秒）：</label>
                     <input type="text" id="dhcp-offer-lease-time" name="dhcp-offer-lease-time">
                 </div>
 
             </section>
 
             <div class="button-wrapper">
-                <button class="btn-modern-blue dark" type="submit" id="btn-save-form">Save</button>
-                <button class="btn-modern-red dark" id="close-btn">Close</button>
+                <button class="btn-modern-blue dark" type="submit" id="btn-save-form">保存</button>
+                <button class="btn-modern-red dark" id="close-btn">关闭</button>
             </div>
 
         </section>
@@ -107,18 +107,18 @@ function dhcp_server_menu() {
         <section class="reservations-section" style="display: none;">
 
             <div>
-                <label for="mac-for-reserve">MAC Address:</label>
+                <label for="mac-for-reserve">MAC 地址：</label>
                 <input type="text" id="mac-for-reserve" name="mac-for-reserve"
                 pattern="^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$" placeholder="00:00:00:00:00:00">
             </div>
 
             <div>
-                <label for="ip-to-reserve">IP Address (IPv4):</label>
+                <label for="ip-to-reserve">保留的 IP 地址：</label>
                 <input type="text" id="ip-to-reserve" name="ip-to-reserve"
                 pattern="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" placeholder="192.168.0.1">
             </div>
 
-            <button class="btn-modern-blue dark small" id="add-reservation">Add</button>
+            <button class="btn-modern-blue dark small" id="add-reservation">添加</button>
 
             <div class="reservations-table-wrapper">
                 <table id="reservations-table" class="inner-table">
@@ -255,7 +255,7 @@ function saveDhcpMenu(event) {
         $networkObject.setAttribute("dhcp-offer-lease-time", $menu.querySelector("#dhcp-offer-lease-time").value);
         $networkObject.setAttribute("dhcp-listen-on-interfaces", listenOnInterfaces.join(","));
 
-        bodyComponent.render(popupMessage(`Changes have been saved successfully.`));
+        bodyComponent.render(popupMessage(`更改已成功保存。`));
 
     }catch (error) {
 
@@ -317,9 +317,9 @@ function validateDHCPMenu() {
     //validate fields
 
     if (isDhcpServer) {
-        if (!isValidIp(ip)) throw new Error(`Error: expected a valid IP instead of "${ip}".`);
-        if (!isValidIp(netmask)) throw new Error(`Error: expected a valid netmask instead of "${netmask}".`);
-        if (gateway !== "" && !isValidIp(gateway)) throw new Error(`Error: expected a valid gateway instead of "${gateway}".`);
+        if (!isValidIp(ip)) throw new Error(`错误：IP“${ip}”无效。`);
+        if (!isValidIp(netmask)) throw new Error(`错误：子网掩码“${netmask}”无效。`);
+        if (gateway !== "" && !isValidIp(gateway)) throw new Error(`错误：网关“${gateway}”无效。`);
     }
 
     if (!isDhcpModuleEmpty()) {
@@ -438,7 +438,7 @@ function removeDhcpReservationHandler(networkObjectId, mac, event) {
     removeDhcpReservation($networkObject.id, mac);
     restoreDhcpReservationTable();
     genDhcpReservationsRows(networkObjectId).forEach($reservation => $reservationsTable.appendChild($reservation));
-    bodyComponent.render(popupMessage(`MAC ${mac} has been removed from the reservations list.`));
+    bodyComponent.render(popupMessage(`MAC 地址 ${mac} 已从保留列表中移除。`));
 }
 
 /**
@@ -481,7 +481,7 @@ function genDhcpReservationsRows(networkObjectId) {
                 <button
                 class="btn-modern-blue dark small no-animation"
                 onclick="removeDhcpReservationHandler('${networkObjectId}', '${reservation}',event)">
-                    Remove
+                    移除
                 </button>
             </td>
         `;

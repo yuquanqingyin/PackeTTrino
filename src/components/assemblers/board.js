@@ -138,7 +138,7 @@ function deleteItem(event) {
         delete clientLeaseTimers[`${$networkObject.id}-${interfaces[0]}`];
         $networkObject.remove();
     }else {
-        boardComponent.render(popupMessage(`<span>Error: </span>Cannot delete a device with connections.`));
+        boardComponent.render(popupMessage(`<span>错误：</span>无法删除仍有连接的设备。`));
     }
 
 }
@@ -163,7 +163,7 @@ function dropPackageOverItem(event) {
 
     try {
         dpkg(networkObjectId, "install", itemId);
-        boardComponent.render(popupMessage(`Package ${itemId} was installed successfully.`));
+        boardComponent.render(popupMessage(`软件包 ${itemId} 已成功安装。`));
     }catch(error) {
         boardComponent.render(popupMessage(error.message));
     }

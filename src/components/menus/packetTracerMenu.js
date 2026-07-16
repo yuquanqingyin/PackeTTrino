@@ -24,14 +24,14 @@ function packetTracer() {
 
     $packetTracer.innerHTML = `
 
-        <div class="window-frame"><p>Packet Tracer</p></div>
+        <div class="window-frame"><p>数据包分析器</p></div>
 
         <div class="filter-traffic">
             <input type="text">
-            <button class="btn-blue" id="filter-traffic-button">Filter</button>
-            <button class="btn-blue" id="clean-traffic-button">Clear</button>
+            <button class="btn-blue" id="filter-traffic-button">筛选</button>
+            <button class="btn-blue" id="clean-traffic-button">清空</button>
             <select id="filter-by-device">
-                <option value="all">All</option>
+                <option value="all">全部设备</option>
             </select>
         </div>
 
@@ -39,12 +39,12 @@ function packetTracer() {
             <table>
                 <tr>
                     <th>XID</th>
-                    <th>Protocol</th>
-                    <th>Type</th>
-                    <th>Origin IP</th>
-                    <th>Destination IP</th>
-                    <th>Origin MAC</th>
-                    <th>Destination MAC</th>
+                    <th>协议</th>
+                    <th>类型</th>
+                    <th>源 IP</th>
+                    <th>目标 IP</th>
+                    <th>源 MAC</th>
+                    <th>目标 MAC</th>
                     <th>TTL</th>
                 </tr>
             </table>
@@ -252,7 +252,7 @@ function insertDevicesToTraffic() {
 function removeDevicesFromTraffic() {
     const $packetTraffic = document.querySelector(".packet-traffic");
     const $packetTrafficSelect = $packetTraffic.querySelector("#filter-by-device");
-    $packetTrafficSelect.innerHTML = `<option value="all">All</option>`;
+    $packetTrafficSelect.innerHTML = `<option value="all">全部设备</option>`;
 }
 
 /**

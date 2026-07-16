@@ -15,14 +15,14 @@ function routingTable() {
     $routingTable.innerHTML = `
         <table>
             <tr>
-                <th>Destination Network</th>
-                <th>Netmask</th>
-                <th>Exit</th>
-                <th>Interface</th>
-                <th>Next Hop</th>
+                <th>目标网络</th>
+                <th>子网掩码</th>
+                <th>出口地址</th>
+                <th>接口</th>
+                <th>下一跳</th>
             </tr>
         </table>
-        <button onclick="closeObjectModalTable(event, '.routing-table')">Close</button>
+        <button onclick="closeObjectModalTable(event, '.routing-table')">关闭</button>
     `;
 
     $routingTable.setAttribute("onclick", "event.stopPropagation()");

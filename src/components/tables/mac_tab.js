@@ -15,12 +15,12 @@ function macTable() {
     $macTable.innerHTML = `
         <table>
             <tr>
-                <th>Device</th>
+                <th>设备</th>
                 <th>MAC</th>
-                <th>Physical Port</th>
+                <th>物理端口</th>
             </tr>
         </table>
-        <button onclick="closeMacTable(event)">Close</button>
+        <button onclick="closeMacTable(event)">关闭</button>
     `;
 
     $macTable.setAttribute("onclick", "event.stopPropagation()");

@@ -25,19 +25,19 @@ async function itemPanel() {
             "name": "upload",
             "image": "./assets/panel/upload.svg",
             "draggable": false,
-            "tooltip": "Upload Network File"
+            "tooltip": "上传网络文件"
         },
         {
             "name": "load",
             "image": "./assets/panel/load.svg",
             "draggable": false,
-            "tooltip": "Load File"
+            "tooltip": "载入已上传的文件"
         },
         {
             "name": "download",
             "image": "./assets/panel/download.svg",
             "draggable": false,
-            "tooltip": "Download Network File"
+            "tooltip": "下载网络文件"
         },
         {
             "name": "pc",
@@ -49,31 +49,31 @@ async function itemPanel() {
             "name": "router",
             "image": "./assets/panel/router.svg",
             "draggable": true,
-            "tooltip": "Router"
+            "tooltip": "路由器"
         },
         {
             "name": "switch",
             "image": "./assets/panel/switch.svg",
             "draggable": true,
-            "tooltip": "Switch"
+            "tooltip": "交换机"
         },
         {
             "name": "dhcpserver",
             "image": "./assets/panel/dhcpserver.svg",
             "draggable": true,
-            "tooltip": "DHCP Server"
+            "tooltip": "DHCP 服务器"
         },
         {
             "name": "dhcprelay",
             "image": "./assets/panel/dhcprelay.svg",
             "draggable": true,
-            "tooltip": "DHCP Agent"
+            "tooltip": "DHCP 中继代理"
         },
         {
             "name": "dnsserver",
             "image": "./assets/panel/dnsserver.svg",
             "draggable": true,
-            "tooltip": "DNS Server"
+            "tooltip": "DNS 服务器"
         },
         {
             "name": "isc-dhcp-server",
@@ -109,37 +109,37 @@ async function itemPanel() {
             "name": "text",
             "image": "./assets/panel/annotation.svg",
             "draggable": true,
-            "tooltip": "Annotation"
+            "tooltip": "文本注释"
         },
         {
             "name": "traffic",
             "image": "./assets/panel/traffic.svg",
             "draggable": false,
-            "tooltip": "Network Traffic"
+            "tooltip": "网络流量"
         },
         {
             "name": "ping",
             "image": "./assets/panel/bus.svg",
             "draggable": false,
-            "tooltip": "Ping Simulator"
+            "tooltip": "Ping 模拟器"
         },
         {
             "name": "animation-controls",
             "image": "./assets/panel/animationControls.svg",
             "draggable": false,
-            "tooltip": "Animation Controls"
+            "tooltip": "动画控制"
         },
         {
             "name": "settings",
             "image": "./assets/panel/settings.svg",
             "draggable": false,
-            "tooltip": "Advanced Options"
+            "tooltip": "通用设置"
         },
         {
             "name": "hide-panel",
             "image": "./assets/panel/hide-panel.svg",
             "draggable": false,
-            "tooltip": "Hide panel"
+            "tooltip": "收起工具栏"
         }
     ]
 

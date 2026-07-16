@@ -32,7 +32,7 @@ function popupMessage(message, imgsrc = "") {
             <p>${message}</p>
             ${imgFragment}
         </div>
-        <button class="btn-modern-red no-animation" style="padding: 5px;" id="btn-close" > Close </button>
+        <button class="btn-modern-red no-animation" style="padding: 5px;" id="btn-close" > 关闭 </button>
     `;
 
     $popup.querySelector("button").addEventListener("click", closePopup);

@@ -35,27 +35,27 @@ function pc_menu() {
         <section class="basic-section">
 
             <div class="form-item">
-                <label for="iface">Interface:</label>
+                <label for="iface">网络接口：</label>
                 <select id="iface" name="iface"></select>
             </div>
 
             <div class="form-item">
-                <label for="ip">IP Address (IPv4):</label>
+                <label for="ip">IP 地址（IPv4）：</label>
                 <input type="text" id="ip" name="ip">
             </div>
 
             <div class="form-item">
-                <label for="netmask">Netmask:</label>
+                <label for="netmask">子网掩码：</label>
                 <input type="text" id="netmask" name="netmask">
             </div>
 
             <div class="form-item">
-                <label for="gateway">Gateway:</label>
+                <label for="gateway">默认网关：</label>
                 <input type="text" id="gateway" name="gateway">
             </div>
 
             <div class="form-item">
-                <label for="dns-server">DNS Servers:</label>
+                <label for="dns-server">DNS 服务器：</label>
                 <input type="text" id="dns-server" name="dns-server">
             </div>
 
@@ -64,12 +64,12 @@ function pc_menu() {
         <section class="modes-wrapper">
 
             <div class="form-item" id="dhcp-mode">
-                <label for="dhcp-toggle"> DHCP Mode: </label>
+                <label for="dhcp-toggle"> DHCP 模式： </label>
                 <input class="btn-toggle" type="checkbox" id="dhcp-toggle" name="dhcp-toggle">
             </div>
 
             <div class="form-item hidden" id="web-server-mode">
-                <label for="web-server-toggle"> Web Server: </label>
+                <label for="web-server-toggle"> Web 服务器： </label>
                 <input class="btn-toggle" type="checkbox" id="web-server-toggle" name="web-server-toggle">
             </div>
 
@@ -78,14 +78,14 @@ function pc_menu() {
         <section class="button-container">
 
             <div id="dhcp-buttons">
-                <button class="btn-modern-blue" type="submit" id="get-btn">Get IP</button>
-                <button class="btn-modern-blue" type="submit" id="renew-btn">Renew IP</button>
-                <button class="btn-modern-blue" type="submit" id="release-btn">Release IP</button>
+                <button class="btn-modern-blue" type="submit" id="get-btn">获取 IP</button>
+                <button class="btn-modern-blue" type="submit" id="renew-btn">续租 IP</button>
+                <button class="btn-modern-blue" type="submit" id="release-btn">释放 IP</button>
             </div>
 
             <div id="basic-buttons">
-                <button class="btn-modern-blue" type="submit" id="save-btn">Save</button>
-                <button class="btn-modern-red"  type="submit" id="close-btn">Close</button>
+                <button class="btn-modern-blue" type="submit" id="save-btn">保存</button>
+                <button class="btn-modern-red"  type="submit" id="close-btn">关闭</button>
             </div>
 
         </section>
@@ -204,10 +204,10 @@ async function pcMenuButtonsHandler(event) {
      * @returns {void}
      */
     const validateForm = () => {
-        if (!isValidIp(newIp)) throw new Error(`Error: IP "${newIp}" is not valid.`);
-        if (!isValidIp(newNetmask)) throw new Error(`Error: Netmask "${newNetmask}" is not valid.`);
-        if (newGateway !== "" && !isValidIp(newGateway)) throw new Error(`Error: Gateway "${newGateway}" is not valid.`);
-        if (newDnsServers.length !== 0 && !newDnsServers.every(isValidIp)) throw new Error(`Error: Invalid DNS servers.`);
+        if (!isValidIp(newIp)) throw new Error(`错误：IP“${newIp}”无效。`);
+        if (!isValidIp(newNetmask)) throw new Error(`错误：子网掩码“${newNetmask}”无效。`);
+        if (newGateway !== "" && !isValidIp(newGateway)) throw new Error(`错误：网关“${newGateway}”无效。`);
+        if (newDnsServers.length !== 0 && !newDnsServers.every(isValidIp)) throw new Error(`错误：DNS 服务器地址无效。`);
     }
 
     /**
@@ -246,7 +246,7 @@ async function pcMenuButtonsHandler(event) {
             configureInterface($networkObject.id, newIp, newNetmask, networkInterface);
             setDefaultGateway($networkObject.id, newGateway);
             setDnsServers($networkObject.id, newDnsServers);
-            bodyComponent.render(popupMessage("Changes have been applied successfully."));
+            bodyComponent.render(popupMessage("配置已成功应用。"));
         },
 
         "get-btn": async () => {

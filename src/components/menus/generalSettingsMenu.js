@@ -22,35 +22,35 @@ function GeneralOptions() {
 
     $generalOptions.innerHTML = `
 
-        <div class="window-frame"> <p> General Options </p> </div>
+        <div class="window-frame"> <p> 通用设置 </p> </div>
 
         <div class="options-group">
-            <label for="dark-mode"> Dark Mode </label>
+            <label for="dark-mode"> 深色模式 </label>
             <input type="checkbox" class="btn-toggle" id="dark-mode" name="dark-mode">
         </div>
 
         <div class="options-group">
-            <label for="visual-toggle"> Visual Mode </label>
+            <label for="visual-toggle"> 数据包可视化 </label>
             <input type="checkbox" class="btn-toggle" id="visual-toggle" name="visual-toggle">
         </div>
 
         <div class="options-group">
-            <label for="ignore-arp-traffic"> Hide ARP Traffic </label>
+            <label for="ignore-arp-traffic"> 隐藏 ARP 流量 </label>
             <input type="checkbox" class="btn-toggle" id="ignore-arp-traffic" name="ignore-arp-traffic">
         </div>
 
         <div class="options-group">
-            <label for="arp-ttl"> ARP TTL </label>
+            <label for="arp-ttl"> ARP 缓存有效期 </label>
             <input type="range" class="btn-input" id="arp-ttl" name="arp-ttl" min="120" max="600" value="400">
             <span id="arp-ttl-value">400s</span>
         </div>
 
         <div class="options-group">
-            <label for="start-tutorial"> Tutorial </label>
-            <button class="btn-modern-blue" id="start-tutorial">Start</button>
+            <label for="start-tutorial"> 新手教程 </label>
+            <button class="btn-modern-blue" id="start-tutorial">开始</button>
         </div>
 
-        <button class="btn-modern-blue" id="close-btn">Close</button>
+        <button class="btn-modern-blue" id="close-btn">关闭</button>
     `;
 
     /**

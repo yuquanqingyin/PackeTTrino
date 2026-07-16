@@ -32,8 +32,8 @@ function dns_server_menu() {
         <div class="window-frame"> <p class="frame-title"></p> </div>
 
         <div class="nav-panel">
-            <button class="btn-modern-blue dark active" id="btn-basic-tab" data-tab="basic-section">Basic</button>
-            <button class="btn-modern-blue dark" id="btn-records" data-tab="records-section">Records</button>
+            <button class="btn-modern-blue dark active" id="btn-basic-tab" data-tab="basic-section">基本设置</button>
+            <button class="btn-modern-blue dark" id="btn-records" data-tab="records-section">DNS 记录</button>
         </div>
 
         <section id="basic-section">
@@ -41,22 +41,22 @@ function dns_server_menu() {
             <section id="network-section" class="hidden">
 
                 <div class="form-item">
-                    <label for="iface">Interface:</label>
+                    <label for="iface">网络接口：</label>
                     <select id="iface" name="iface"></select>
                 </div>
 
                 <div class="form-item">
-                    <label for="ip">IP Address (IPv4):</label>
+                    <label for="ip">IP 地址（IPv4）：</label>
                     <input type="text" id="ip" name="ip">
                 </div>
 
                 <div class="form-item">
-                    <label for="netmask">Netmask:</label>
+                    <label for="netmask">子网掩码：</label>
                     <input type="text" id="netmask" name="netmask">
                 </div>
 
                 <div class="form-item">
-                    <label for="gateway">Gateway:</label>
+                    <label for="gateway">默认网关：</label>
                     <input type="text" id="gateway" name="gateway">
                 </div>
 
@@ -65,20 +65,20 @@ function dns_server_menu() {
             <section id ="dns-server-section">
 
                 <div class="form-item">
-                    <label for="dns-recursive">Recursive DNS Server:</label>
+                    <label for="dns-recursive">递归 DNS 查询：</label>
                     <input class="btn-toggle" type="checkbox" id="dns-recursive" name="dns-recursive">
                 </div>
 
                 <div class="form-item">
-                    <label for="dns-cache">Cache DNS Server:</label>
+                    <label for="dns-cache">启用 DNS 缓存：</label>
                     <input class="btn-toggle" type="checkbox" id="dns-cache" name="dns-cache">
                 </div>
 
             </section>
 
             <div class="button-wrapper">
-                <button class="btn-modern-blue dark" type="submit">Save</button>
-                <button class="btn-modern-red dark" id="close-btn">Close</button>
+                <button class="btn-modern-blue dark" type="submit">保存</button>
+                <button class="btn-modern-red dark" id="close-btn">关闭</button>
             </div>
 
         </section>
@@ -86,12 +86,12 @@ function dns_server_menu() {
         <section id="records-section" class="hidden">
 
             <div class="form-item">
-                <label for="domain">Domain:</label>
+                <label for="domain">域名：</label>
                 <input type="text" id="domain" name="domain">
             </div>
 
             <div class="form-item">
-                <label for="type">Record Type:</label>
+                <label for="type">记录类型：</label>
                 <select id="type" name="type">
                     <option value="A">A</option>
                     <option value="CNAME">CNAME</option>
@@ -101,27 +101,27 @@ function dns_server_menu() {
             </div>
 
             <div class="form-item">
-                <label for="value">Value:</label>
+                <label for="value">记录值：</label>
                 <input type="text" id="value" name="value">
             </div>
 
             <div class="soa-record-wrapper hidden">
 
                 <div class="form-item">
-                    <label for="serial">Serial Number:</label>
+                    <label for="serial">序列号：</label>
                     <input type="text" id="serial" name="serial">
                 </div>
 
                 <div class="form-item">
-                    <label for="cache-ttl">Cache TTL:</label>
+                    <label for="cache-ttl">缓存有效期：</label>
                     <input type="text" id="cache-ttl" name="cache-ttl">
                 </div>
 
             </div>
 
             <div class="button-wrapper">
-                <button class="btn-modern-blue dark" id="btn-add-record" style="padding: 5px;">Add Record</button>
-                <button class="btn-modern-red dark" id="btn-del-record" style="padding: 5px;">Delete Record</button>
+                <button class="btn-modern-blue dark" id="btn-add-record" style="padding: 5px;">添加记录</button>
+                <button class="btn-modern-red dark" id="btn-del-record" style="padding: 5px;">删除记录</button>
             </div>
 
             <div class="table-wrapper">
@@ -236,11 +236,11 @@ function saveDnsServerMenu(event) {
         if (isDnsServer) {
 
             if (!isEmptyForm) {
-                if (!isValidIp(ip)) throw new Error(`Error: IP "${ip}" is not valid.`);
-                if (!isValidIp(netmask)) throw new Error(`Error: Netmask "${netmask}" is not valid.`);
+                if (!isValidIp(ip)) throw new Error(`错误：IP“${ip}”无效。`);
+                if (!isValidIp(netmask)) throw new Error(`错误：子网掩码“${netmask}”无效。`);
             }
 
-            if (gateway !== "" && !isValidIp(gateway)) throw new Error(`Error: Gateway "${gateway}" is not valid.`);
+            if (gateway !== "" && !isValidIp(gateway)) throw new Error(`错误：网关“${gateway}”无效。`);
 
             configureInterface($serverObject.id, ip, netmask, networkObjectInterface);
             setDefaultGateway($serverObject.id, gateway);
@@ -250,7 +250,7 @@ function saveDnsServerMenu(event) {
         $serverObject.setAttribute("recursion", isRecursive);
         $serverObject.setAttribute("resolved", isCache);
 
-        bodyComponent.render(popupMessage(`Changes have been saved successfully.`));
+        bodyComponent.render(popupMessage(`更改已成功保存。`));
 
     } catch (error) {
 

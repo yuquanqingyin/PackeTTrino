@@ -8,7 +8,7 @@ const $APACHEDEFAULTCONTENT = `
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Apache2 PackeTTrino Default Page: It works</title>
+<title>Apache2 PackeTTrino 默认页面：运行正常</title>
 <style type="text/css" media="screen">
 :root {
 --primary-color: #2563eb;
@@ -124,22 +124,21 @@ margin-bottom: 12px;
 <div class="page_header floating_element">
 <img src="./assets/favicon.svg" alt="Ubuntu Logo" class="floating_element"/>
 <span class="floating_element">
-Apache2 PackeTTrino Default Page
+Apache2 PackeTTrino 默认页面
 </span>
 </div>
 <div class="content_section floating_element">
 <div class="section_header section_header_red">
 <div id="about"></div>
-It works!
+运行正常！
 </div>
 <div class="content_section_text">
 <p>
-This is the default welcome page used to verify that the Apache2 PackeTTrino server is
-working correctly after installation.
-It is based on the equivalent Debian page, from which the Apache package in Ubuntu is derived.
-If you can read this page, the Apache PackeTTrino HTTP server installed at this site is working correctly.
-You should <b>replace this file</b> (located at
-<tt>/var/www/html/index.html</tt>) before continuing to use your HTTP server.
+这是用于验证 Apache2 PackeTTrino 服务器安装后能否正常工作的默认欢迎页面。
+此页面参考了 Debian 的 Apache 默认页面。
+如果你能看到此页面，说明该站点上的 Apache PackeTTrino HTTP 服务器运行正常。
+继续使用 HTTP 服务器之前，请<b>替换此文件</b>：
+<tt>/var/www/html/index.html</tt>。
 </p>
 </div>
 </div>
@@ -171,7 +170,7 @@ const $APACHEREJECTCONTENT = `
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Connection Rejected - Access Denied</title>
+<title>连接被拒绝 - 无权访问</title>
 <style type="text/css" media="screen">
 :root {
 --primary-color: #dc2626;
@@ -339,33 +338,30 @@ Apache2 PackeTTrino Server
 <div class="content_section floating_element">
 <div class="section_header section_header_red">
 <div id="error"></div>
-Connection Rejected
+连接被拒绝
 </div>
 <div class="error-code">
-Error 403 - Access Denied
+错误 403 - 无权访问
 </div>
 <div class="content_section_text">
 <p>
-We're sorry, but your connection request has been <b>rejected</b> by the server.
-You do not have sufficient permissions to access this resource on
-<tt>Apache2 PackeTTrino</tt>.
+服务器已<b>拒绝</b>你的连接请求。
+你没有足够的权限访问 <tt>Apache2 PackeTTrino</tt> 上的此资源。
 </p>
 <p>
-This message indicates that the web server is working correctly, but access
-to the requested page or directory is <b>restricted</b> by the security configuration.
+Web 服务器运行正常，但安全配置<b>限制</b>了对所请求页面或目录的访问。
 </p>
 <p>
-If you believe you should have access to this content, please contact the
-<b>system administrator</b> to verify your access permissions.
+如果你认为自己应当拥有访问权限，请联系<b>系统管理员</b>检查权限设置。
 </p>
 </div>
 
 <div class="recommendations">
-<h3>Possible causes:</h3>
+<h3>可能的原因：</h3>
 <ul>
-<li>Insufficient file or directory permissions</li>
-<li>Restrictive access configuration in <tt>apache2.conf</tt></li>
-<li>Configured IP or domain restrictions</li>
+<li>文件或目录权限不足</li>
+<li><tt>apache2.conf</tt> 中存在访问限制</li>
+<li>配置了 IP 或域名限制</li>
 </ul>
 </div>
 </div>
@@ -383,7 +379,7 @@ const $FORBIDDENCONTENT = `
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Connection Rejected - Access Denied</title>
+<title>连接被拒绝 - 无权访问</title>
 <style type="text/css" media="screen">
 :root {
 --primary-color: #dc2626;
@@ -551,24 +547,21 @@ Apache2 PackeTTrino Server
 <div class="content_section floating_element">
 <div class="section_header section_header_red">
 <div id="error"></div>
-Forbidden
+禁止访问
 </div>
 <div class="error-code">
-You do not have access to this resource.
+你无权访问此资源。
 </div>
 <div class="content_section_text">
 <p>
-We're sorry, but your connection request has been <b>rejected</b> by the server.
-You do not have sufficient permissions to access this resource on
-<tt>Apache2 PackeTTrino</tt>.
+服务器已<b>拒绝</b>你的连接请求。
+你没有足够的权限访问 <tt>Apache2 PackeTTrino</tt> 上的此资源。
 </p>
 <p>
-This message indicates that the web server is working correctly, but access
-to the requested page or directory is <b>restricted</b> by the security configuration.
+Web 服务器运行正常，但安全配置<b>限制</b>了对所请求页面或目录的访问。
 </p>
 <p>
-If you believe you should have access to this content, please contact the
-<b>system administrator</b> to verify your access permissions.
+如果你认为自己应当拥有访问权限，请联系<b>系统管理员</b>检查权限设置。
 </p>
 </div>
 </div>
@@ -586,7 +579,7 @@ const $DEVICEREJECTIONCONTENT = `
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Connection Rejected - Server Unavailable</title>
+<title>连接被拒绝 - 服务器不可用</title>
 <style type="text/css" media="screen">
 :root {
 --primary-color: #dc2626;
@@ -761,32 +754,26 @@ margin-bottom: 0;
 <div class="page_header floating_element">
     <div class="error-icon">✕</div>
     <span class="floating_element">
-        Connection Rejected by Server
+        服务器拒绝了连接
     </span>
 </div>
 <div class="content_section floating_element">
     <div class="section_header section_header_red">
         <div id="error"></div>
-        Service Unavailable
+        服务不可用
     </div>
     <div class="error-code">
-        Error 503 - Server Temporarily Unavailable
+        错误 503 - 服务器暂时不可用
     </div>
     <div class="content_section_text">
         <p>
-            The server has <b>rejected your connection</b> at this time. This may be because
-            the service is temporarily overloaded, under maintenance, or experiencing
-            technical difficulties.
+            服务器目前<b>拒绝了你的连接</b>。服务可能暂时过载、正在维护，或遇到了技术故障。
         </p>
         <p>
-            This type of error indicates that the server is <b>running</b> but cannot
-            process your request at this time. The situation is generally temporary
-            and the service should restore automatically.
+            此错误表示服务器仍在<b>运行</b>，但目前无法处理请求。该情况通常是暂时的，服务应会自动恢复。
         </p>
         <p>
-            We recommend <b>trying again</b> in a few minutes. If the problem persists,
-            the server may be experiencing more serious issues that require
-            technical intervention.
+            建议几分钟后<b>重试</b>。如果问题持续存在，服务器可能需要进一步检修。
         </p>
     </div>
 </div>
@@ -804,7 +791,7 @@ const $404ERRORCONTENT = `
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Error 404 - Not Found</title>
+<title>错误 404 - 找不到资源</title>
 <style type="text/css" media="screen">
 :root {
 --primary-color:rgb(0, 0, 0);
@@ -976,12 +963,11 @@ Apache2 PackeTTrino Server
 Error 404
 </div>
 <div class="error-code">
-The requested resource was not found on this server.
+在此服务器上找不到请求的资源。
 </div>
 <div class="content_section_text">
 <p>
-We're sorry, but the requested resource was not found on this server.
-<tt>Apache2 PackeTTrino</tt>.
+<tt>Apache2 PackeTTrino</tt> 上不存在请求的资源。
 </p>
 </div>
 </div>
@@ -1000,7 +986,7 @@ return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Loading - PackeTTrino</title>
+<title>正在连接 - PackeTTrino</title>
 <style type="text/css" media="screen">
 :root {
 --primary-color: rgb(59, 130, 246);
@@ -1200,15 +1186,15 @@ transform: scale(1.02);
 
             <div class="loader-container">
                 <div class="spinner"></div>
-                <div class="loading-text">Loading<span class="loading-dots"></span></div>
-                <div class="loading-subtitle">Please wait while we process your request</div>
+                <div class="loading-text">正在加载<span class="loading-dots"></span></div>
+                <div class="loading-subtitle">正在处理请求，请稍候</div>
                 <div class="progress-bar">
                     <div class="progress-fill"></div>
                 </div>
             </div>
 
             <div class="server-info">
-                <strong>Status:</strong> Connecting to ${site}<br>
+                <strong>状态：</strong>正在连接 ${site}<br>
             </div>
 
         </div>
@@ -1231,7 +1217,7 @@ return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Directory Index</title>
+        <title>目录索引</title>
         <style type="text/css" media="screen">
             :root {
                 --primary-color: #2563eb;
@@ -1470,7 +1456,7 @@ return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w
             <div class="page_header floating_element">
                 <div class="directory-icon">📁</div>
                 <span class="floating_element">
-                    Directory Index
+                    目录索引
                 </span>
             </div>
             <div class="content_section floating_element">

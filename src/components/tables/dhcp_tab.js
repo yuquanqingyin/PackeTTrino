@@ -17,11 +17,11 @@ function dhcpTable() {
             <tr>
                 <th>IP</th>
                 <th>MAC</th>
-                <th>Host</th>
-                <th>Lease Time</th>
+                <th>主机</th>
+                <th>租约时间</th>
             </tr>
         </table>
-        <button onclick="closeObjectModalTable(event, '.dhcp-table')">Close</button>
+        <button onclick="closeObjectModalTable(event, '.dhcp-table')">关闭</button>
     `;
 
     $dhcpTable.setAttribute("onclick", "event.stopPropagation();");

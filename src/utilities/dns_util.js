@@ -35,9 +35,9 @@ function command_dns(networkObjectId, args) {
 
         $dnsTable.innerHTML = `
             <tr>
-                <th>Domain</th>
-                <th>Type</th>
-                <th>Value</th>
+                <th>域名</th>
+                <th>类型</th>
+                <th>记录值</th>
             </tr>
         `;
 

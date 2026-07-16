@@ -18,13 +18,13 @@ function browser() {
         <div class="browser-header">
 
             <div class="browser-controls">
-                <button class="control close" aria-label="Close"></button>
-                <button class="control minimize" aria-label="Minimize"></button>
-                <button class="control maximize" aria-label="Maximize"></button>
+                <button class="control close" aria-label="关闭"></button>
+                <button class="control minimize" aria-label="最小化"></button>
+                <button class="control maximize" aria-label="最大化"></button>
             </div>
 
             <div class="browser-tabs">
-                <button class="tab active">New tab</button>
+                <button class="tab active">新标签页</button>
             </div>
 
             <div class="browser-address-bar">
@@ -32,10 +32,10 @@ function browser() {
                 <div class="address-bar-icons">
                    <!-- <button class="icon back" aria-label="Back">◀</button>
                     <button class="icon forward" aria-label="Forward">▶</button> -->
-                    <button class="icon refresh" aria-label="Refresh" id="btn-refresh">↻</button>
+                    <button class="icon refresh" aria-label="刷新" id="btn-refresh">↻</button>
                 </div>
 
-                <input type="text" class="address-input" placeholder="https://www.example.com" aria-label="Address bar">
+                <input type="text" class="address-input" placeholder="输入网址或 IP 地址" aria-label="地址栏">
 
                <!-- <div class="address-bar-icons">
                     <button class="icon star" aria-label="Bookmark">★</button>
@@ -75,7 +75,7 @@ const $BROWSERHOMEPAGE = `
 /** @type {string} Full HTML document displayed when a requested page is not found (404). */
 const $BROWSERERRORPAGE = `
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="zh-CN">
     <head>
         <title>Amin Search</title>
         <meta charset="UTF-8">
@@ -168,8 +168,8 @@ const $BROWSERERRORPAGE = `
                 <span>Amin Search</span>
             </div>
             <div class="error-code">404</div>
-            <h1>Page Not Found!</h1>
-            <p>The page you are looking for does not exist or has been moved to another location.</p>
+            <h1>找不到页面</h1>
+            <p>你访问的页面不存在，或已被移动到其他位置。</p>
             <p id="error-message"></p>
         </div>
     </body>

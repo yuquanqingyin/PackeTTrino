@@ -78,7 +78,7 @@ class slidePresentation {
                     }).join('')
                 }
                 <img class="next-slide-btn" src="./assets/tutorial/next.svg" alt="next" onclick="tutorial.render(tutorial.currentSlide + 1);">
-                <button class="end-presentation btn-modern-blue" onclick="tutorial.endPresentation();">Done!</button>
+                <button class="end-presentation btn-modern-blue" onclick="tutorial.endPresentation();">完成</button>
             </div>
             <div class="links">
                 <a href="https://github.com/EvilPrime98/PackeTTrino" target="_blank">
@@ -159,70 +159,69 @@ class slidePresentation {
 
 
 const introductionSlide = new slide(
-  'Welcome to PackeTTrino 🥳',
+  '欢迎使用 PackeTTrino 🥳',
   './assets/favicon.svg',
-  `PackeTTrino is a graphical and interactive tool for learning networking in an intuitive way.
-    In this tutorial, you will learn how to create devices, connect them, and simulate a complete network. Let's get started!`
+  `PackeTTrino 是一款直观、可交互的图形化网络学习工具。
+    本教程将带你创建并连接设备，完成一个网络的搭建与模拟。现在开始吧！`
 );
 
 introductionSlide.mediaShadow = "none";
 
 const createAndConnectDevicesSlide = new slide(
-  'Create and connect devices 💻',
+  '创建并连接设备 💻',
   './assets/tutorial/slide1.gif',
-  `To create a device, drag it from the bottom panel onto the workspace.
-  You can drop computers, switches, routers, and more. Each one has its own menu for configuration.
-  Try connecting PCs to switches, switches to routers, etc. Cables will appear visually on the workspace.`
+  `从底部工具栏把设备拖到工作区即可创建它。
+  你可以添加 PC、交换机、路由器及多种服务器，每种设备都有自己的配置菜单。
+  把 PC 拖到交换机上即可建立连接；工作区会显示对应的网线。`
 );
 
 const configureDevicesSlide = new slide(
-  'Device options ⚙️',
+  '配置设备 ⚙️',
   './assets/tutorial/slideDeviceSettings.gif',
-  `Right-click on a device to access its configuration options.
-  You will see different options depending on the device and the installed packages.`
+  `单击设备可设置 IP 地址等基本参数；右键单击设备可打开终端、状态表及其他高级选项。
+  不同设备及已安装的软件包会提供不同的配置功能。`
 );
 
 const testNetworkSlide = new slide(
-  'Connectivity Test 📡',
+  '连通性测试 📡',
   './assets/tutorial/slidePing.gif',
-  `Once the devices are connected and configured,
-  test the network with <code>ping</code> between hosts. If everything is properly set up, you will see successful replies and know the network is working.`
+  `设备连接并配置完成后，可在主机之间使用 <code>ping</code> 测试网络。
+  如果配置正确，终端会显示成功的应答信息。`
 );
 
 const nowItsYourTurnSlide = new slide(
-  'Now it\'s your turn! 🚀',
+  '现在轮到你了！🚀',
   './assets/tutorial/lastSlide.jpg',
-  `Close this tutorial and try building
-  your own network topology. Explore the options, experiment, and if you get lost… you can always come back to this tutorial
-  or check the official documentation on GitHub. Good luck, future networking expert!`
+  `关闭教程，尝试搭建自己的网络拓扑吧！大胆探索和实验；遇到问题时，可以随时从通用设置重新打开本教程，
+  也可以查看 GitHub 上的项目文档。祝你学习顺利！`
 );
 
 const creditsSlide = new slide(
-  'Credits 👨‍💻',
+  '项目致谢 👨‍💻',
   './assets/tutorial/ies.png',
-  `This application was developed entirely by <br><a href="https://www.linkedin.com/in/josé-amín-pérez-alconchel-2191b430b" target="_blank">José Amín Pérez Alconchel</a>
-  as a Final Degree Project in Network Computer Systems Administration at IES Mar de Cádiz.
+  `本应用由 <br><a href="https://www.linkedin.com/in/josé-amín-pérez-alconchel-2191b430b" target="_blank">José Amín Pérez Alconchel</a> 独立开发，
+  是其在 IES Mar de Cádiz 网络计算机系统管理专业的毕业设计。
   <br><br>
-  If you enjoy the world of networking you can also find information about various protocols and tools
-  at <a href="https://www.fpgenred.es" target="_blank">www.fpgenred.es</a>`
+  如需了解更多网络协议和工具，可访问
+  <a href="https://www.fpgenred.es" target="_blank">www.fpgenred.es</a>。`
 );
 
 creditsSlide.mediaShadow = "none";
 
 const terminalSlide = new slide(
-  'Integrated Terminal 🗔',
+  '集成终端 🗔',
   './assets/tutorial/slideTerminal.gif',
-  `The integrated terminal is a command tool for interacting with your device.
-  You can use commands like <code>ping</code>, <code>curl</code>, <code>ifup</code>, or configure IPs and subnet masks.
-  You can perform filesystem operations with commands like <code>ls</code>, <code>cat</code>, or <code>nano</code>.`
+  `集成终端用于通过命令操作设备。
+  你可以使用 <code>ping</code>、<code>curl</code>、<code>ifup</code> 等命令，也可以配置 IP 地址和子网掩码。
+  <code>ls</code>、<code>cat</code>、<code>nano</code> 等命令可用于操作模拟文件系统。`
 );
 
 terminalSlide.mediaHeight = "250px";
 
 const installPackagesSlide = new slide(
-  'Install packages 📦',
+  '安装软件包 📦',
   './assets/tutorial/slidePaquetes.gif',
-  `To install packages, you can use the <code>apt</code> command from the integrated terminal or drag and drop the package onto the device.`
+  `你可以在集成终端中使用 <code>apt</code> 命令安装软件包，也可以直接把底部工具栏中的软件包拖到设备上。`
 );
 
 installPackagesSlide.mediaHeight = "250px";

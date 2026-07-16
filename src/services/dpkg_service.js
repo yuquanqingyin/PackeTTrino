@@ -28,13 +28,13 @@ function dpkg(networkObjectId, option, package) {
         "amin-search": "browser",
     }
 
-    if (!availablePackages.includes(package)) throw new Error(`Error: Unable to locate package ${package}.`);
+    if (!availablePackages.includes(package)) throw new Error(`错误：找不到软件包 ${package}。`);
 
     const service = packagesToServices[package];
     const isServiceInstalled = $networkObject.getAttribute(service) !== null;
 
-    if (option === "install" && isServiceInstalled) throw new Error(`${package} is already at its newest version.`);
-    if (option === "remove" && !isServiceInstalled) throw new Error(`Error: Package ${package} is not installed, so it will not be removed.`);
+    if (option === "install" && isServiceInstalled) throw new Error(`${package} 已是最新版本。`);
+    if (option === "remove" && !isServiceInstalled) throw new Error(`错误：软件包 ${package} 尚未安装，无法移除。`);
     if (option === "install") dpkgInstaller(package);
     if (option === "remove") dpkgUninstaller(package);
 

@@ -32,7 +32,7 @@ function AnimationControls() {
             </button>
 
             <div class="slider-container">
-                <label for="visual-speed"> Animation Speed </label>
+                <label for="visual-speed"> 动画速度 </label>
                 <input type="range" id="visual-speed" name="visual-speed" min="100" max="1000">
                 <p id="visual-speed-value">300</p><span>ms</span>
             </div>

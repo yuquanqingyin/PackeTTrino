@@ -242,12 +242,12 @@ function addDhcpReservation(networkObjectId, mac, ip) {
     const offerNetmask = $networkObject.getAttribute("dhcp-offer-netmask");
     const reservations = JSON.parse($networkObject.getAttribute("dhcp-reservations"));
 
-    if (!isValidIp(ip)) throw new Error("Error: The entered IP is not valid.");
+    if (!isValidIp(ip)) throw new Error("错误：输入的 IP 地址无效。");
 
     if (getNetwork(ip, offerNetmask) !== getNetwork(rangeStart, offerNetmask))
-        throw new Error("Error: The entered IP does not belong to the DHCP server's service range.");
+        throw new Error("错误：输入的 IP 地址不在 DHCP 服务器的地址池中。");
 
-    if (!isValidMac(mac)) throw new Error("Error: The entered MAC address is not valid.");
+    if (!isValidMac(mac)) throw new Error("错误：输入的 MAC 地址无效。");
 
     reservations[mac] = ip;
 
@@ -414,37 +414,37 @@ function validateDhpcConfiguration(networkObjectId, configObject) {
     //validate the fields
 
     if (!dhcpListenOnInterfaces.every(item => availableInterfaces.includes(item))) 
-        throw new Error(`Error: one or more of the listen interfaces are not valid.`);
+        throw new Error(`错误：一个或多个监听接口无效。`);
 
     if (!isValidIp(rangeStart)) 
-        throw new Error(`Error: expected a valid start IP instead of "${rangeStart}".`);
+        throw new Error(`错误：地址池起始 IP“${rangeStart}”无效。`);
 
     if (!isValidIp(rangeEnd)) 
-        throw new Error(`Error: expected a valid end IP instead of "${rangeEnd}".`);
+        throw new Error(`错误：地址池结束 IP“${rangeEnd}”无效。`);
 
     if (!isValidIp(dhcpOfferNetmask)) 
-        throw new Error(`Error: expected a valid subnet mask instead of "${dhcpOfferNetmask}".`);
+        throw new Error(`错误：子网掩码“${dhcpOfferNetmask}”无效。`);
 
     if (getNetwork(rangeStart, dhcpOfferNetmask) !== getNetwork(rangeEnd, dhcpOfferNetmask)) 
-        throw new Error(`Error: the IP range is not valid.`);
+        throw new Error(`错误：IP 地址池无效。`);
 
     if (ipToBinary(rangeStart) >= ipToBinary(rangeEnd)) 
-        throw new Error(`Error: the IP range is not valid.`);
+        throw new Error(`错误：IP 地址池无效。`);
 
     if (dhcpOfferGateway !== "" && !isValidIp(dhcpOfferGateway)) 
-        throw new Error(`Error: expected a valid gateway instead of "${dhcpOfferGateway}".`);
+        throw new Error(`错误：网关“${dhcpOfferGateway}”无效。`);
     
 
     if (!dhcpOfferDnsServers.every(item => isValidIp(item))) 
-        throw new Error(`Error: one or more of the DNS servers are not valid.`);
+        throw new Error(`错误：一个或多个 DNS 服务器地址无效。`);
 
     if (isNaN(dhcpOfferLeaseTime)) 
-        throw new Error(`Error: expected a valid lease time instead of "${dhcpOfferLeaseTime}".`);
+        throw new Error(`错误：租约时间“${dhcpOfferLeaseTime}”无效。`);
 
     if (dhcpOfferLeaseTime < 120) 
-        throw new Error(`Error: the lease time must be greater than 120 seconds.`);
+        throw new Error(`错误：租约时间必须大于 120 秒。`);
 
     if (dhcpOfferLeaseTime > 86400) 
-        throw new Error(`Error: the lease time must be less than 86400 seconds.`);
+        throw new Error(`错误：租约时间必须小于 86400 秒。`);
 
 }

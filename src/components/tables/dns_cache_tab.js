@@ -15,12 +15,12 @@ function cacheDnsTable() {
     $cacheDnsTable.innerHTML = `
         <table>
             <tr>
-                <th>Domain</th>
-                <th>Record Type</th>
-                <th>Value</th>
+                <th>域名</th>
+                <th>记录类型</th>
+                <th>记录值</th>
             </tr>
         </table>
-        <button onclick="closeObjectModalTable(event, '.cache-dns-table')">Close</button>
+        <button onclick="closeObjectModalTable(event, '.cache-dns-table')">关闭</button>
     `;
 
     $cacheDnsTable.setAttribute("onclick", "event.stopPropagation();");

@@ -386,7 +386,7 @@ function splitLast(text, separator) {
  */
 function fileInputChangeHandler(event) {
     const fileName = event.target.files[0].name;
-    bodyComponent.render(popupMessage(`File <em>${fileName}</em> loaded successfully. To display the contents, click:`, "/assets/panel/load.svg"));
+    bodyComponent.render(popupMessage(`文件 <em>${fileName}</em> 已上传。点击“载入已上传的文件”即可显示其中的网络：`, "/assets/panel/load.svg"));
 }
 
 /**
@@ -399,13 +399,13 @@ function fileInputLoadHandler() {
     const $inputFile = document.getElementById("fileInput");
 
     if ($inputFile.files.length === 0) {
-        boardComponent.render(popupMessage("Please upload a file first."));
+        boardComponent.render(popupMessage("请先上传一个网络文件。"));
         return;
     }
 
     const fileName = $inputFile.files[0].name;
 
-    bodyComponent.render(confirmPopup(`Do you want to load the file ${fileName}?`, loadState));
+    bodyComponent.render(confirmPopup(`确定要载入文件 ${fileName} 吗？当前工作区将被替换。`, loadState));
 
 }
 

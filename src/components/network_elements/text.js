@@ -26,7 +26,7 @@ function TextObject(x, y) {
     //advanced options
 
     $advancedOptions.classList.add("advanced-options-modal");
-    $advancedOptions.innerHTML = `<button onclick="deleteItem(event)">Delete</button>`;
+    $advancedOptions.innerHTML = `<button onclick="deleteItem(event)">删除注释</button>`;
 
     //input
 

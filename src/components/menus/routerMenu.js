@@ -33,31 +33,31 @@ function router_menu() {
         <div class="window-frame"> <p class="frame-title"></p></div>
 
         <div class="nav-panel">
-            <button class="btn-modern-blue dark active" id="btn-basic-tab" data-tab="basic-section">Basic</button>
-            <button class="btn-modern-blue dark" id="btn-routing-rules" data-tab="routing-rules-section">Routing Rules</button>
+            <button class="btn-modern-blue dark active" id="btn-basic-tab" data-tab="basic-section">基本设置</button>
+            <button class="btn-modern-blue dark" id="btn-routing-rules" data-tab="routing-rules-section">路由规则</button>
         </div>
 
         <section id="basic-section">
 
             <div class="interfaces-wrapper">
                 <select id="iface"></select>
-                <button class="btn-modern-red" id="del-iface">Delete</button>
-                <button class="btn-modern-blue dark" id="add-iface">Add</button>
+                <button class="btn-modern-red" id="del-iface">删除</button>
+                <button class="btn-modern-blue dark" id="add-iface">添加</button>
             </div>
 
             <div class="form-item">
-                <label for="router-ip">IP Address (IPv4):</label>
+                <label for="router-ip">IP 地址（IPv4）：</label>
                 <input type="text" id="router-ip" name="router-ip">
             </div>
 
             <div class="form-item">
-                <label for="router-netmask">Netmask:</label>
+                <label for="router-netmask">子网掩码：</label>
                 <input type="text" name="router-netmask" id="router-netmask">
             </div>
 
             <div class="form-item">
-                <button class="btn-modern-blue dark" style="padding: 10px;">Save</button>
-                <button class="btn-modern-red dark" style="padding: 10px;" id="close-btn">Close</button>
+                <button class="btn-modern-blue dark" style="padding: 10px;">保存</button>
+                <button class="btn-modern-red dark" style="padding: 10px;" id="close-btn">关闭</button>
             </div>
 
         </section>
@@ -65,23 +65,23 @@ function router_menu() {
         <section id="routing-rules-section" class="hidden">
 
             <div class="form-item">
-                <label for="destination-ip">Destination IP (IPv4/CIDR):</label>
+                <label for="destination-ip">目标网络（IPv4/CIDR）：</label>
                 <input type="text" id="destination-ip" name="destination-ip" placeholder="192.168.0.0/24">
             </div>
 
             <div class="form-item">
-                <label for="gateway-interface">Exit Interface:</label>
+                <label for="gateway-interface">出口接口：</label>
                 <input type="text" id="gateway-interface" name="gateway-interface" placeholder="enp0s3">
             </div>
 
             <div class="form-item">
-                <label for="nexthop">Next Hop:</label>
+                <label for="nexthop">下一跳：</label>
                 <input type="text" id="nexthop" name="nexthop" placeholder="0.0.0.0">
             </div>
 
             <div class="form-item">
-                <button class="btn-modern-blue dark" style="padding: 10px;" id="btn-add-rule">Add Rule</button>
-                <button class="btn-modern-red dark" style="padding: 10px;" id="btn-del-rule">Delete Rule</button>
+                <button class="btn-modern-blue dark" style="padding: 10px;" id="btn-add-rule">添加规则</button>
+                <button class="btn-modern-red dark" style="padding: 10px;" id="btn-del-rule">删除规则</button>
             </div>
 
             <div class="table-wrapper"><table id="routing-rules-table" class="inner-table"></table></div>
@@ -189,12 +189,12 @@ function saveRouterMenu(event) {
         const netmask = routerChangesBuffer[networkObjectInterface].netmask;
 
         if (ip !== "" && !isValidIp(ip)) {
-            bodyComponent.render(popupMessage(`<span>Error: </span>IP "${ip}" is not valid.`));
+            bodyComponent.render(popupMessage(`<span>错误：</span>IP“${ip}”无效。`));
             return;
         }
 
         if (netmask !== "" && !isValidIp(netmask)) {
-            bodyComponent.render(popupMessage(`<span>Error: </span>Netmask "${netmask}" is not valid.`));
+            bodyComponent.render(popupMessage(`<span>错误：</span>子网掩码“${netmask}”无效。`));
             return;
         }
 
@@ -204,7 +204,7 @@ function saveRouterMenu(event) {
     }
 
     $menu.querySelector("#routing-rules-table").innerHTML = $networkObject.querySelector(".routing-table").querySelector("table").innerHTML;
-    bodyComponent.render(popupMessage(`Changes have been saved successfully.`));
+    bodyComponent.render(popupMessage(`更改已成功保存。`));
 
 }
 
@@ -282,7 +282,7 @@ function addGraphicInterface(event) {
     //add a new interface reference
     routerChangesBuffer[`enp0s${index}`] = { ip: "",netmask: "" };
 
-    bodyComponent.render(popupMessage(`Interface enp0s${index} added successfully.`));
+    bodyComponent.render(popupMessage(`接口 enp0s${index} 已成功添加。`));
 
 }
 
@@ -307,12 +307,12 @@ function deleteGraphicInterface(event) {
     const fixedInterfaces = ["enp0s3"];
 
     if (fixedInterfaces.includes(currentInterface)) {
-        bodyComponent.render(popupMessage(`<span>Error: </span>Interface ${currentInterface} cannot be deleted.`));
+        bodyComponent.render(popupMessage(`<span>错误：</span>无法删除接口 ${currentInterface}。`));
         return;
     }
 
     if ($networkObject.getAttribute("data-switch-" + currentInterface) !== "") {
-        bodyComponent.render(popupMessage(`<span>Error: </span>Interface ${currentInterface} has an active connection.`));
+        bodyComponent.render(popupMessage(`<span>错误：</span>接口 ${currentInterface} 上仍有活动连接。`));
         return;
     }
 
@@ -324,7 +324,7 @@ function deleteGraphicInterface(event) {
 
     delete routerChangesBuffer[currentInterface];
 
-    bodyComponent.render(popupMessage(`Interface ${currentInterface} deleted successfully.`));
+    bodyComponent.render(popupMessage(`接口 ${currentInterface} 已成功删除。`));
 }
 
 /**
@@ -442,21 +442,21 @@ function addRoutingRuleGraphic(networkObjectId, destination, gatewayInterface, n
 
     //<-- validate destination IP
 
-    if (!isValidCidrIp(destination)) throw new Error(`Error: expected a valid prefix instead of "${destination}".`);
+    if (!isValidCidrIp(destination)) throw new Error(`错误：“${destination}”不是有效的 CIDR 网络。`);
     const [destinationIP, destinationNetmask] = parseCidr(destination);
-    if (getNetwork(destinationIP, destinationNetmask) !== destinationIP) throw new Error(`Error: destination "${destination}" is NOT a network.`);
+    if (getNetwork(destinationIP, destinationNetmask) !== destinationIP) throw new Error(`错误：目标“${destination}”不是网络地址。`);
 
     //<-- validate the exit interface
 
-    if (!(getInterfaces(networkObjectId)).includes(gatewayInterface)) throw new Error(`Error: interface "${gatewayInterface}" is not recognized.`);
+    if (!(getInterfaces(networkObjectId)).includes(gatewayInterface)) throw new Error(`错误：无法识别接口“${gatewayInterface}”。`);
     const [gatewayIp, gatewayNetmask, interfaceMac] = getIfaceData(networkObjectId, gatewayInterface);
-    if (!gatewayIp) throw new Error(`Error: interface "${gatewayInterface}" is not configured.`);
+    if (!gatewayIp) throw new Error(`错误：接口“${gatewayInterface}”尚未配置。`);
 
     //<-- validate the next hop
 
-    if (!isValidIp(nexthop)) throw new Error(`Error: expected a valid IP instead of "${nexthop}" for the next hop.`);
-    if (getNetwork(gatewayIp, gatewayNetmask) !== getNetwork(nexthop, gatewayNetmask)) throw new Error(`Error: next hop "${nexthop}" is unreachable.`);
-    if (nexthop === "0.0.0.0") throw new Error(`Error: next hop "${nexthop}" is not valid for a remote rule.`);
+    if (!isValidIp(nexthop)) throw new Error(`错误：“${nexthop}”不是有效的下一跳 IP 地址。`);
+    if (getNetwork(gatewayIp, gatewayNetmask) !== getNetwork(nexthop, gatewayNetmask)) throw new Error(`错误：无法到达下一跳“${nexthop}”。`);
+    if (nexthop === "0.0.0.0") throw new Error(`错误：不能将“${nexthop}”用作远程路由的下一跳。`);
 
     setRemoteRoutingRule(networkObjectId,
         destinationIP, //destination network
@@ -485,9 +485,9 @@ function removeRoutingRuleGraphic(networkObjectId, destination) {
 
     //<-- validate destination IP
 
-    if (!isValidCidrIp(destination)) throw new Error(`Error: expected a valid prefix instead of "${destination}".`);
+    if (!isValidCidrIp(destination)) throw new Error(`错误：“${destination}”不是有效的 CIDR 网络。`);
     const [destinationIP, destinationNetmask] = parseCidr(destination);
-    if (getNetwork(destinationIP, destinationNetmask) !== destinationIP) throw new Error(`Error: destination "${destination}" is NOT a network.`);
+    if (getNetwork(destinationIP, destinationNetmask) !== destinationIP) throw new Error(`错误：目标“${destination}”不是网络地址。`);
 
     removeRemoteRoutingRule(networkObjectId,
         destinationIP, //destination network

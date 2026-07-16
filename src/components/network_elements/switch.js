@@ -36,8 +36,8 @@ function SwitchObject(x, y) {
 
     networkObjectAdvancedOptions.classList.add("advanced-options-modal");
     networkObjectAdvancedOptions.innerHTML = `
-        <button onclick="deleteItem(event)">Delete</button>
-        <button class="clusterize-button" onclick="clusterizeSwitch(event)">Cluster</button>
+        <button onclick="deleteItem(event)">删除设备</button>
+        <button class="clusterize-button" onclick="clusterizeSwitch(event)">折叠设备组</button>
         `;
     $switchObject.appendChild(networkObjectAdvancedOptions);
 
@@ -77,7 +77,7 @@ function switchConn(event) {
     const isClusterized = $switchObject.getAttribute("clusterized");
 
     if (isClusterized === "true") {
-        bodyComponent.render(popupMessage(`<span>Error: </span>You must de-cluster the switch before adding devices.`));
+        bodyComponent.render(popupMessage(`<span>错误：</span>添加设备前，请先展开交换机设备组。`));
         return;
     }
 
@@ -143,7 +143,7 @@ function clusterizeSwitch(event) {
         }
     });
 
-    $advancedOptions.querySelector(".clusterize-button").innerHTML = "De-cluster";
+    $advancedOptions.querySelector(".clusterize-button").innerHTML = "展开设备组";
     $advancedOptions.querySelector(".clusterize-button").setAttribute("onclick", "desClusterizeSwitch(event)");
     $switchObject.setAttribute("clusterized", "true");
     $icon.src = "./assets/board/cluster.svg";
@@ -177,7 +177,7 @@ function desClusterizeSwitch(event) {
         }
     });
 
-    $advancedOptions.querySelector(".clusterize-button").innerHTML = "Cluster";
+    $advancedOptions.querySelector(".clusterize-button").innerHTML = "折叠设备组";
     $advancedOptions.querySelector(".clusterize-button").setAttribute("onclick", "clusterizeSwitch(event)");
     $switchObject.setAttribute("clusterized", "false");
     $icon.src = "./assets/board/switch.svg";

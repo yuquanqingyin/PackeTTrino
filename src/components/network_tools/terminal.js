@@ -16,7 +16,7 @@ function terminal() {
 
     $terminal.innerHTML = `
 
-        <div class="window-frame">Terminal</div>
+        <div class="window-frame">终端</div>
 
         <p>
             <span id="terminal-prompt"></span>
@@ -27,7 +27,7 @@ function terminal() {
 
         <div class="editor-wrapper" style="display: none;">
             <div class="editor-buttons">
-                <p><span>^S</span>Save and Exit</p>
+                <p><span>^S</span>保存并退出</p>
             </div>
             <p class="file-editor-error"></p>
             <textarea class="file-editor" data-file=""></textarea>

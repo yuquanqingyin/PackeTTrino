@@ -28,22 +28,22 @@ function dhcp_agent_menu() {
         <section class="basic-section">
 
             <div class="form-item">
-                <label for="iface">Interface:</label>
+                <label for="iface">网络接口：</label>
                 <select id="iface" name="iface"></select>
             </div>
 
             <div class="form-item">
-                <label for="ip">IP Address (IPv4):</label>
+                <label for="ip">IP 地址（IPv4）：</label>
                 <input type="text" id="ip" name="ip">
             </div>
 
             <div class="form-item">
-                <label for="netmask">Netmask:</label>
+                <label for="netmask">子网掩码：</label>
                 <input type="text" id="netmask" name="netmask">
             </div>
 
             <div class="form-item">
-                <label for="gateway">Gateway:</label>
+                <label for="gateway">默认网关：</label>
                 <input type="text" id="gateway" name="gateway">
             </div>
 
@@ -52,20 +52,20 @@ function dhcp_agent_menu() {
         <section class="dhcp-relay-section">
 
             <div class="form-item">
-                <label for="main-server">Main DHCP Server:</label>
+                <label for="main-server">上游 DHCP 服务器：</label>
                 <input type="text" id="main-server" name="main-server">
             </div>
 
             <div class="form-item">
-                <label for="listen-on-interfaces">Listening Interfaces:</label>
+                <label for="listen-on-interfaces">监听接口：</label>
                 <input type="text" id="listen-on-interfaces" name="listen-on-interfaces">
             </div>
 
         </section>
 
         <div class="button-wrapper">
-            <button class="btn-modern-blue" type="submit">Save</button>
-            <button class="btn-modern-red"  id="close-btn">Close</button>
+            <button class="btn-modern-blue" type="submit">保存</button>
+            <button class="btn-modern-red"  id="close-btn">关闭</button>
         </div>
     `;
 
@@ -173,24 +173,24 @@ function saveDhcpRelayMenu(event) {
     try {
 
         if (isDhcpRelay) {
-            if (!isValidIp(newIp)) throw new Error(`Error: "${newIp}" is not a valid IP.`);
-            if (!isValidIp(newNetmask)) throw new Error(`Error: "${newNetmask}" is not a valid netmask.`);
-            if (newGateway !== "" && !isValidIp(newGateway)) throw new Error(`Error: "${newGateway}" is not a valid gateway.`);
+            if (!isValidIp(newIp)) throw new Error(`错误：“${newIp}”不是有效的 IP 地址。`);
+            if (!isValidIp(newNetmask)) throw new Error(`错误：“${newNetmask}”不是有效的子网掩码。`);
+            if (newGateway !== "" && !isValidIp(newGateway)) throw new Error(`错误：“${newGateway}”不是有效的网关地址。`);
         }
 
         if (newMainServer !== "" && !isValidIp(newMainServer)) {
-            throw new Error(`Error: "${newMainServer}" is not a valid main server IP.`);
+            throw new Error(`错误：“${newMainServer}”不是有效的上游 DHCP 服务器地址。`);
         }
 
         if (newListenOnInterfaces.length !== 0 && !newListenOnInterfaces.every(item => availableInterfaces.includes(item))) {
-            throw new Error(`Error: Some of the listening interfaces are not valid.`);
+            throw new Error(`错误：一个或多个监听接口无效。`);
         }
 
         configureInterface($networkObject.id, newIp, newNetmask, networkObjectInterface);
         setDefaultGateway($networkObject.id, newGateway);
         $networkObject.setAttribute("dhcrelay-main-server", newMainServer);
         $networkObject.setAttribute("dhcrelay-listen-on-interfaces", newListenOnInterfaces?.join(","));
-        bodyComponent.render(popupMessage(`Changes have been saved successfully.`));
+        bodyComponent.render(popupMessage(`更改已成功保存。`));
 
     }catch(error) {
 

@@ -222,11 +222,11 @@ function routingTableRestore(routerObjectid) {
 
     routingTable.innerHTML = `
                 <tr>
-                    <th>Destination</th>
-                    <th>Netmask</th>
-                    <th>Gateway</th>
-                    <th>Interface</th>
-                    <th>Next Hop</th>
+                    <th>目标网络</th>
+                    <th>子网掩码</th>
+                    <th>网关</th>
+                    <th>接口</th>
+                    <th>下一跳</th>
                 </tr>
                 <tr>
                     <td></td>
