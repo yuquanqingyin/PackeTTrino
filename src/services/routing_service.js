@@ -56,6 +56,8 @@ function setDirectRoutingRule(networkObjectId, gateway, netmask, iface) {
 
     }
 
+    decorateRoutingTableActions(networkObjectId);
+
 }
 
 /**
@@ -116,6 +118,8 @@ function setRemoteRoutingRule(routerObjectId, destination, netmask, gateway, ifa
 
     }
 
+    decorateRoutingTableActions(routerObjectId);
+
 }
 
 /**
@@ -160,6 +164,108 @@ function removeRemoteRoutingRule(routerObjectId, destination, netmask) {
         if ($fields[4].innerHTML === "0.0.0.0") return;
         if ($fields[0].innerHTML === destination && $fields[1].innerHTML === netmask) $rule.remove();
     });
+}
+
+/**
+ * Adds an operation column to a routing table. Remote and default routes receive
+ * a one-click delete button, while directly connected routes are marked as
+ * protected because they are generated from interface addressing.
+ *
+ * @param {string} networkObjectId - DOM id of the device that owns the route table.
+ * @param {HTMLTableElement|null} [table=null] - Optional mirrored table, such as the router menu table.
+ * @returns {void}
+ */
+function decorateRoutingTableActions(networkObjectId, table = null) {
+    const $networkObject = document.getElementById(networkObjectId);
+    if (!$networkObject) return;
+
+    const $routingTable = table || $networkObject.querySelector(".routing-table table");
+    if (!$routingTable) return;
+
+    const $rows = $routingTable.querySelectorAll("tr");
+    if ($rows.length === 0) return;
+
+    const $headerRow = $rows[0];
+    if (!$headerRow.querySelector(".route-actions-header")) {
+        const $header = document.createElement("th");
+        $header.classList.add("route-actions-header");
+        $header.innerText = "操作";
+        $headerRow.appendChild($header);
+    }
+
+    for (let i = 1; i < $rows.length; i++) {
+        const $row = $rows[i];
+        const $fields = Array.from($row.querySelectorAll("td:not(.route-action-cell)"));
+        if ($fields.length < 5) continue;
+
+        const destination = $fields[0].innerText.trim();
+        const netmask = $fields[1].innerText.trim();
+        const nextHop = $fields[4].innerText.trim();
+        let $actionCell = $row.querySelector(".route-action-cell");
+
+        if (!$actionCell) {
+            $actionCell = document.createElement("td");
+            $actionCell.classList.add("route-action-cell");
+            $row.appendChild($actionCell);
+        }
+
+        $actionCell.replaceChildren();
+
+        if (!destination || !netmask || !nextHop) {
+            $actionCell.innerText = "—";
+            continue;
+        }
+
+        if (nextHop === "0.0.0.0") {
+            const $label = document.createElement("span");
+            $label.classList.add("route-direct-label");
+            $label.innerText = "直连";
+            $label.title = "直连路由由接口 IP 自动生成，不能单独删除";
+            $actionCell.appendChild($label);
+            continue;
+        }
+
+        const $deleteButton = document.createElement("button");
+        $deleteButton.type = "button";
+        $deleteButton.classList.add("route-delete-button");
+        $deleteButton.innerText = "删除";
+        $deleteButton.setAttribute("aria-label", `删除路由 ${destination}/${netmaskToCidr(netmask)}`);
+        $deleteButton.dataset.networkObjectId = networkObjectId;
+        $deleteButton.dataset.destination = destination;
+        $deleteButton.dataset.netmask = netmask;
+        $deleteButton.addEventListener("click", deleteRoutingRuleButtonHandler);
+        $actionCell.appendChild($deleteButton);
+    }
+}
+
+/**
+ * Deletes the remote/default route represented by a row-level delete button and
+ * refreshes both the device table and the router configuration menu mirror.
+ *
+ * @param {MouseEvent} event - Click event from a `.route-delete-button`.
+ * @returns {void}
+ */
+function deleteRoutingRuleButtonHandler(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    const $button = event.currentTarget;
+    const networkObjectId = $button.dataset.networkObjectId;
+    const destination = $button.dataset.destination;
+    const netmask = $button.dataset.netmask;
+
+    removeRemoteRoutingRule(networkObjectId, destination, netmask);
+    decorateRoutingTableActions(networkObjectId);
+
+    const $menu = document.querySelector(".router-form");
+    if ($menu && $menu.dataset.id === networkObjectId) {
+        const $networkObject = document.getElementById(networkObjectId);
+        const $menuTable = $menu.querySelector("#routing-rules-table");
+        $menuTable.innerHTML = $networkObject.querySelector(".routing-table table").innerHTML;
+        decorateRoutingTableActions(networkObjectId, $menuTable);
+    }
+
+    bodyComponent.render(popupMessage("路由规则已删除。"));
 }
 
 /**
@@ -227,6 +333,7 @@ function routingTableRestore(routerObjectid) {
                     <th>网关</th>
                     <th>接口</th>
                     <th>下一跳</th>
+                    <th class="route-actions-header">操作</th>
                 </tr>
                 <tr>
                     <td></td>

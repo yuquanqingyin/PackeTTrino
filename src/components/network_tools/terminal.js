@@ -16,7 +16,10 @@ function terminal() {
 
     $terminal.innerHTML = `
 
-        <div class="window-frame">终端</div>
+        <div class="window-frame">
+            <span class="terminal-title">终端</span>
+            <button type="button" class="terminal-close-button" aria-label="关闭终端" title="关闭终端">×</button>
+        </div>
 
         <p>
             <span id="terminal-prompt"></span>
@@ -37,6 +40,11 @@ function terminal() {
 
     $terminal.addEventListener("keydown", terminalKeyboard);
     $terminal.querySelector(".window-frame").addEventListener("mousedown", dragModal);
+    $terminal.querySelector(".terminal-close-button").addEventListener("mousedown", event => event.stopPropagation());
+    $terminal.querySelector(".terminal-close-button").addEventListener("click", event => {
+        event.stopPropagation();
+        closeTerminal(event);
+    });
     $terminal.addEventListener("click", clickTerminal);
     $terminal.querySelector(".terminal-input").addEventListener("keydown", unixParser);
     $terminal.querySelector(".terminal-output").addEventListener("click", clickTerminal);

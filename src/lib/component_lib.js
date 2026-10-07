@@ -158,6 +158,11 @@ function showObjectModalTable(event, selector) {
     const $networkObject = event.target.closest(".item-dropped")
     const $advancedOptionsModal = $networkObject.querySelector(".advanced-options-modal");
     const $Table = $networkObject.querySelector(selector);
+
+    if (selector === ".routing-table") {
+        decorateRoutingTableActions($networkObject.id, $Table.querySelector("table"));
+    }
+
     const boardProperties = window.getComputedStyle($board, null);
     const boardHeight = parseInt(boardProperties.getPropertyValue("height"));
     const boardWidth = parseInt(boardProperties.getPropertyValue("width"));

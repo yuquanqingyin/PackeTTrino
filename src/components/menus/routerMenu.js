@@ -157,7 +157,7 @@ function showRouterMenu(event) {
     $menu.querySelector("#router-netmask").value = routerChangesBuffer[availableInterfaces[0]].netmask;
 
     //load routing rules
-    $menu.querySelector("#routing-rules-table").innerHTML = $networkObject.querySelector(".routing-table").querySelector("table").innerHTML;
+    refreshRouterRoutingRulesTable($networkObject.id);
 
     //display the menu
     $networkObject.querySelector(".advanced-options-modal").style.display = "none";
@@ -203,7 +203,7 @@ function saveRouterMenu(event) {
 
     }
 
-    $menu.querySelector("#routing-rules-table").innerHTML = $networkObject.querySelector(".routing-table").querySelector("table").innerHTML;
+    refreshRouterRoutingRulesTable($networkObject.id);
     bodyComponent.render(popupMessage(`更改已成功保存。`));
 
 }
@@ -377,7 +377,7 @@ function addRoutingRuleGraphicHandler(event) {
 
     try {
         addRoutingRuleGraphic(networkObjectId, destination, gatewayInterface, nexthop);
-        $menu.querySelector("#routing-rules-table").innerHTML = $networkObject.querySelector(".routing-table").querySelector("table").innerHTML;
+        refreshRouterRoutingRulesTable(networkObjectId);
     }catch (error) {
         bodyComponent.render(popupMessage(error.message));
     }
@@ -411,11 +411,29 @@ function removeRoutingRuleGraphicHandler(event) {
 
     try {
         removeRoutingRuleGraphic(networkObjectId, destination);
-        $menu.querySelector("#routing-rules-table").innerHTML = $networkObject.querySelector(".routing-table").querySelector("table").innerHTML;
+        refreshRouterRoutingRulesTable(networkObjectId);
     }catch (error) {
         bodyComponent.render(popupMessage(error.message));
     }
 
+}
+
+/**
+ * Copies a router's live route table into the configuration menu and attaches
+ * row-level route actions to the copied table.
+ *
+ * @param {string} networkObjectId - DOM id of the router being configured.
+ * @returns {void}
+ */
+function refreshRouterRoutingRulesTable(networkObjectId) {
+    const $menu = document.querySelector(".router-form");
+    const $networkObject = document.getElementById(networkObjectId);
+    const $sourceTable = $networkObject.querySelector(".routing-table table");
+    const $menuTable = $menu.querySelector("#routing-rules-table");
+
+    decorateRoutingTableActions(networkObjectId, $sourceTable);
+    $menuTable.innerHTML = $sourceTable.innerHTML;
+    decorateRoutingTableActions(networkObjectId, $menuTable);
 }
 
 /**

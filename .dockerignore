@@ -5,6 +5,7 @@
 .pnpm-store
 node_modules
 dist
+outputs
+tmp
 *.log
 .eslintcache
-

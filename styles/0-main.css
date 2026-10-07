@@ -2897,6 +2897,40 @@ circle:hover {
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
+
+        .terminal-title {
+            padding: 0;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 30px;
+            color: #fff;
+            pointer-events: none;
+        }
+
+        .terminal-close-button {
+            position: absolute;
+            top: 3px;
+            right: 6px;
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            border: 0;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 22px;
+            cursor: pointer;
+
+            &:hover,
+            &:focus-visible {
+                background-color: #d7263d;
+                outline: none;
+            }
+        }
 
         p {
             text-transform: uppercase;
@@ -2979,6 +3013,42 @@ circle:hover {
 
     }
 
+}
+
+.routing-table .route-action-cell,
+#routing-rules-table .route-action-cell {
+    min-width: 64px;
+    padding: 4px !important;
+    text-align: center;
+}
+
+.routing-table .route-delete-button,
+#routing-rules-table .route-delete-button {
+    min-width: 52px;
+    margin: 0 !important;
+    padding: 6px 10px !important;
+    border: 0;
+    border-radius: 6px;
+    background-color: #bd0505;
+    color: #fff !important;
+    font-family: var(--inter);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+        background-color: #e00000;
+        outline: 2px solid rgba(189, 5, 5, 0.25);
+        outline-offset: 1px;
+    }
+}
+
+.route-direct-label {
+    color: #666;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 /*TEXT EDITOR*/

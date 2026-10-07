@@ -7,6 +7,10 @@ dist/
 coverage/
 .eslintcache
 
+# Generated student packages, teaching documents, and temporary verification files
+/outputs/
+/tmp/
+
 # Logs
 *.log
 npm-debug.log*
@@ -28,3 +32,4 @@ Thumbs.db
 # Local AI tooling
 .claude/
 .codex/
+/.agents/

@@ -1,0 +1,9 @@
+# Use the tested image at school. This file intentionally has no build section.
+# For Docker Hub, put PACKTTRINO_IMAGE=yourname/packttrino-zh:2026-10-07 in .env.
+services:
+  packttrino:
+    image: "${PACKTTRINO_IMAGE:-packttrino-zh:2026-10-07}"
+    container_name: packttrino
+    restart: unless-stopped
+    ports:
+      - "${PACKTTRINO_PORT:-8080}:80"

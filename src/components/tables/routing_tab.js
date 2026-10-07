@@ -20,6 +20,7 @@ function routingTable() {
                 <th>出口地址</th>
                 <th>接口</th>
                 <th>下一跳</th>
+                <th class="route-actions-header">操作</th>
             </tr>
         </table>
         <button onclick="closeObjectModalTable(event, '.routing-table')">关闭</button>

@@ -507,7 +507,8 @@ function catchopts(options, args) {
 }
 
 /**
- * @description Returns the list of interface names available on a network device in order
+ * @description Returns the list of interface names available on a network device in numeric order.
+ * Interface-number gaps are supported, so deleting a middle interface does not hide later ones.
  * (enp0s3, enp0s8, enp0s9, …). Accepts either a DOM id string or the element itself.
  * @param {string|Element} identifier - DOM id of the network object or the element itself.
  * @returns {string[]} Array of interface name strings (e.g. ["enp0s3", "enp0s8"]).
@@ -515,18 +516,17 @@ function catchopts(options, args) {
 function getInterfaces(identifier) {
 
     const $networkObject = (typeof identifier === "string") ? document.getElementById(identifier) : identifier;
-    const response = [];
-    let index = 3;
-    let networkInterface = $networkObject.getAttribute("ip-enp0s" + index);
+    const interfaceAttributePattern = /^ip-(enp0s\d+)$/;
 
-    while (networkInterface !== null) {
-        response.push(`enp0s` + index);
-        if (index === 3) index = 8;
-        else index++;
-        networkInterface = $networkObject.getAttribute("ip-enp0s" + index);
-    }
-
-    return response;
+    return Array.from($networkObject.attributes)
+        .map(attribute => attribute.name.match(interfaceAttributePattern))
+        .filter(match => match !== null)
+        .map(match => match[1])
+        .sort((ifaceA, ifaceB) => {
+            const indexA = parseInt(ifaceA.replace("enp0s", ""));
+            const indexB = parseInt(ifaceB.replace("enp0s", ""));
+            return indexA - indexB;
+        });
 
 }
 
@@ -539,14 +539,9 @@ function getInterfaces(identifier) {
 function isConnected(networkObjectId) {
 
     const $networkObject = document.getElementById(networkObjectId);
-    let index = 3;
-    let switchAttribute = $networkObject.getAttribute("data-switch-enp0s" + index);
 
-    while (switchAttribute !== null) {
-        if (switchAttribute !== "") return true;
-        if (index === 3) index = 8;
-        else index++;
-        switchAttribute = $networkObject.getAttribute("data-switch-enp0s" + index);
+    for (const iface of getInterfaces($networkObject)) {
+        if ($networkObject.getAttribute(`data-switch-${iface}`)) return true;
     }
 
     if (networkObjectId.startsWith("switch-")) return getDeviceTable(networkObjectId).length !== 0;
@@ -565,14 +560,9 @@ function isConnected(networkObjectId) {
 function getAvailableInterface(networkObjectId) {
 
     const $networkObject = document.getElementById(networkObjectId);
-    let index = 3;
-    let switchConn = $networkObject.getAttribute("data-switch-enp0s" + index);
 
-    while (switchConn !== null) {
-        if (switchConn === "") return `enp0s${index}`;
-        if (index === 3) index = 8;
-        else index++;
-        switchConn = $networkObject.getAttribute("data-switch-enp0s" + index);
+    for (const iface of getInterfaces($networkObject)) {
+        if ($networkObject.getAttribute(`data-switch-${iface}`) === "") return iface;
     }
 
     return false;
@@ -601,22 +591,11 @@ function getIfaceData(networkObjectId, iface) {
 function getInterfaceSwitchInfo(networkObjectId, switchObjectId) {
 
     const $networkObject = document.getElementById(networkObjectId);
-    let index = 3;
-    let switchConn = $networkObject.getAttribute("data-switch-enp0s" + index);
-    const response = [];
 
-    while (switchConn !== null) {
-
-        if (switchConn === switchObjectId) {
-            response.push($networkObject.getAttribute("ip-enp0s" + index));
-            response.push($networkObject.getAttribute("netmask-enp0s" + index));
-            response.push($networkObject.getAttribute("mac-enp0s" + index));
-            return response;
+    for (const iface of getInterfaces($networkObject)) {
+        if ($networkObject.getAttribute(`data-switch-${iface}`) === switchObjectId) {
+            return getIfaceData(networkObjectId, iface);
         }
-
-        if (index === 3) index = 8;
-        else index++;
-        switchConn = $networkObject.getAttribute("data-switch-enp0s" + index);
     }
 
     return [false, false, false];
@@ -647,15 +626,11 @@ function switchToInterface(networkObjectId, switchId) {
 function getAvailableIps(networkObjectId) {
 
     const $networkObject = document.getElementById(networkObjectId);
-    let index = 3;
-    let networkObjectIp = $networkObject.getAttribute("ip-enp0s" + index);
     const availableIps = [];
 
-    while (networkObjectIp !== null) {
+    for (const iface of getInterfaces($networkObject)) {
+        const networkObjectIp = $networkObject.getAttribute(`ip-${iface}`);
         if (networkObjectIp !== "") availableIps.push(networkObjectIp);
-        if (index === 3) index = 8;
-        else index++;
-        networkObjectIp = $networkObject.getAttribute("ip-enp0s" + index);
     }
 
     return availableIps;
@@ -675,22 +650,13 @@ function getInfoFromIp(networkObjectId, ip) {
 
     const $networkObject = document.getElementById(networkObjectId);
     const response = [false, false, false];
-    let index = 3;
-    let interfaceIp = $networkObject.getAttribute("ip-enp0s" + index);
 
-    while (interfaceIp !== null) {
-
-        if (interfaceIp === ip) {
-            response[0] = `enp0s${index}`;
-            response[1] = $networkObject.getAttribute("data-switch-enp0s" + index);
-            response[2] = $networkObject.getAttribute("mac-enp0s" + index);
+    for (const iface of getInterfaces($networkObject)) {
+        if ($networkObject.getAttribute(`ip-${iface}`) === ip) {
+            response[0] = iface;
+            response[1] = $networkObject.getAttribute(`data-switch-${iface}`);
+            response[2] = $networkObject.getAttribute(`mac-${iface}`);
         }
-
-        if (index === 3) index = 8;
-        else index++;
-
-        interfaceIp = $networkObject.getAttribute("ip-enp0s" + index);
-
     }
 
     return response;
@@ -706,18 +672,10 @@ function getInfoFromIp(networkObjectId, ip) {
 function getMacAddresses(networkObjectId) {
 
     const $networkObject = document.getElementById(networkObjectId);
-    let index = 3;
-    let mac = $networkObject.getAttribute("mac-enp0s" + index);
-    const macs = [];
 
-    while (mac !== null) {
-        macs.push(mac);
-        if (index === 3) index = 8;
-        else index++;
-        mac = $networkObject.getAttribute("mac-enp0s" + index);
-    }
-
-    return macs;
+    return getInterfaces($networkObject)
+        .map(iface => $networkObject.getAttribute(`mac-${iface}`))
+        .filter(mac => mac !== null);
 
 }
 
